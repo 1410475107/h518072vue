@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue学习</title>
+</head>
+
+<body>
+    <div id="app">
+        生日：{{birthday}}，年龄：{{age}}
+        生日：<input type="text" name="birthday" value="" v-model="birthday"> <hr>
+        关键词：<input type="text" name="kw" value="" v-model="kw"> <hr>
+        <ol>
+            <li v-for="k in list" :key="k.id" v-html="k.kw"></li>
+        </ol>
+    </div>
+</body>
+</html>
