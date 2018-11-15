@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue学习</title>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <li @click="changeMycom('passwd')">修改密码</li>
+            <li @click="changeMycom('myheader')">修改头像</li>
+            <li @click="changeMycom('order')">我的订单</li>
+        </ol>
+        <keep-alive>
+            <component :is="mycom"></component>
+        </keep-alive>
+      
+    </div>
+
+     
+</body>
+
+</html>

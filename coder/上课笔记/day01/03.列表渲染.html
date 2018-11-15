@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue学习</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="stu in list">{{stu}}</li>
+        </ul>
+
+        <ol>
+            <li v-for="stu in list1" :key="stu.name">
+                姓名：{{stu.name}}，
+                性别：{{stu.gender}}，
+                年龄：{{stu.age}}
+            </li>
+        </ol>
+
+        <span v-for="(obj,ind) in objdata">{{binfo[ind]}}：{{obj}}，</span>
+
+        binfo:{
+            cname:'班级名称',
+            num:'人数',
+            add:'上课地址'
+        }
+
+
+
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.myclass{
+    width: 220px;
+    height: 200px;
+    background-color: #f34;
+    border-radius: 5px;
+}
+
+.mydiv{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(97, 72, 74);
+    border-radius: 0px;
+}
