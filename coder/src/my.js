@@ -5,33 +5,37 @@ import Axios from 'axios';
 let vm = new Vue({
     el: '#app',
     data: {
-        formdata:{
-            username: '',
-            passwd: ''
-        },
-        tips:'',
-        tc:'err'
+        birthday:'1992-09-09',
+        kw:'女装',
+        list:[]
     },
-    methods: {
-        Login() {
-            let _this =this;
-            Axios.post('http://localhost:81/login', _this.formdata)
-                .then(function (response) {
-                    console.log(response.data);
-                    if(response.data.r == 'username_not_exist'){
-                        _this.tips = '账号不存在';
-                        _this.tc = 'err';
-                    }else if(response.data.r == 'passwd_err'){
-                        _this.tips = '密码错误';
-                        _this.tc = 'err';
-                    }else  if(response.data.r == 'success'){
-                        _this.tips = '登录成功';
-                        _this.tc = 'success';
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
+    //计算属性
+    computed:{
+        age:function(){
+            return new Date().getFullYear() - this.birthday.split('-')[0];
+        }
+    },
+    watch: {
+        birthday:function(){
+            console.log(this.age);
+        },
+        kw:function(){
+            let _this = this;
+            Axios.get('http://localhost:81/getkw', {
+                params: {
+                    kw:_this.kw
+                }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                //服务器返回值交给  list
+                for (let index = 0; index < response.data.length; index++) {
+                    response.data[index].kw = response.data[index].kw.replace(_this.kw, `<span class="err">${_this.kw}</span>`);
+                }
+                _this.list = response.data;
+            })
+            .catch(function (error) {
+            })
         }
     }
 });

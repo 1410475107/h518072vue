@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  database : 'h518072'
+  database : 'test'
 });
 connection.connect();
 
@@ -43,6 +43,19 @@ app.post('/login', (req, res) => {
             res.json({r:'success'});
         }
     });
+});
+
+
+app.get('/getkw', (req, res) => {
+    //接收get过来的值
+    let kw = req.query.kw;
+    let sql = `SELECT * FROM pc WHERE kw LIKE "%${kw}%" LIMIT 50`;
+    connection.query(sql, (err, results)=>{
+        res.json(results);
+    });
+    
+
+    
 });
 
 app.listen(81);
