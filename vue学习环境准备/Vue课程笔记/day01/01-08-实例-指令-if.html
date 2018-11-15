@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-07-简写</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>指令：v-开头的；</h3>
+        <ol>
+            <li>v-show：修改的是display属性值；</li>
+            <li>v-if：直接对节点进行增删操作；</li>
+        </ol>
+        <div class="show123" v-show="ifshow">展示内容</div>
+        <div class="mydiv" v-if="show">这里显示内容</div>
+        
+        <ul v-if="data === 5">
+            <li>列表1</li>
+            <li>列表2</li>
+            <li>列表3</li>
+            <li>列表4</li>
+            <li>列表5</li>
+        </ul>
+
+        <ul v-else-if="data === 3">
+            <li>列表1</li>
+            <li>列表2</li>
+            <li>列表3</li>
+        </ul>
+
+        <ul v-else>
+            <li>列表1</li>
+            <li>列表2</li>
+        </ul>
+        
+    </div>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                show:0,
+                ifshow:0,
+                data:5
+            }
+        });
+    </script>
+</body>
+</html>

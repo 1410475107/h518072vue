@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-04-11-webpack-vue-cli</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+        .img{
+            width: 230px;
+            height: 230px;
+        }
+        .plist{
+            width: 230px;
+            height: 300px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>如何增加自己的页面？</h3>
+    <ol>
+        <li>路由配置参考文档：http://router.vuejs.org/zh-cn/essentials/getting-started.html</li>
+        <li>路由添加：src/route/index.js；
+        <pre>
+            {
+                path:'/mytest',
+                component: MyTest
+            }
+
+            添加完成后这样的：
+            //路由配置参考文档：http://router.vuejs.org/zh-cn/essentials/getting-started.html
+            export default new Router({
+                routes: [
+                    {
+                        path: '/',
+                        name: 'HelloWorld',
+                        component: HelloWorld
+                    },
+                    {
+                        path:'/mytest',
+                        component: MyTest
+                    }
+                ]
+            })
+        </pre>
+        </li>
+
+        <li>注入组件：import MyTest from '@/components/MyTest'；</li>
+        <li>当然，你需要对应的组件；</li>
+        <li>
+            使用rout-link添加链接：< router-link to="/mytest"></ router-link> 
+            <pre>
+                to作为属性支持动态属性值：
+                < router-link :to="{name:'user',params:{userid:'123'}}">传递数据</ router-link>
+
+                此时对应的路由：
+                {
+                    // 如果需要传递数据
+                    path:'/user/:userid',
+                    name:'user',
+                    component: UserCenter
+                }
+            </pre>
+        </li>
+        <li>
+            链接地址可以传递数据：
+            <pre>
+                {
+                    // 如果需要传递数据
+                    path:'/user/:userid/:username',
+                    name:'user',
+                    component: UserCenter
+                }
+            </pre>
+            链接加入：
+            <pre>
+                < router-link :to="{name:'user',params:{userid:'20181012',username:'中文'}}">传递数据</ router-link>
+            </pre>
+            数据的接收：
+            <pre>
+                {{$route.params.userid}}， {{$route.params.username}}
+            </pre>
+
+        </li>
+        
+
+    </ol>
+</div>
+</body>
+</html>

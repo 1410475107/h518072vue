@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-17-样式操作</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>支持对象语法；</h3>
+    <ol>
+        <li>可以传给 v-bind:class 一个对象，实现动态切换class，可以一次控制一个或多个class；</li>
+        <li>v-bind:class 指令可以与普通的 class 属性共存；</li>
+        <li>一样的，我们还是建议把业务处理放在vue里面，而不是模板里面</li>
+
+    </ol>
+    <div class="mydiv" v-bind:class="{myclass:isuse, color:iswhite}">是否启用myclass；</div>
+
+    <div class="mydiv1" :class="myobj">把对象都放在vue里面进行处理</div>
+</div>
+<script>
+    //简单的字符串直接修改class或style的值
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+            isuse:1,    //true，表示启用myclass，此时class的值是 mydiv myclass
+            iswhite:0   //color样式没有启用
+        },
+        //计算属性
+        computed:{
+            myobj: function (){
+                return {
+                    myclass:this.isuse,
+                    color:this.iswhite
+                };
+            }
+        }
+    });
+</script>
+</body>
+</html>

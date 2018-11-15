@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-06-循环列表</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-for可以通过对象的属性进行循环操作</h3>
+    <ol>
+        <li>
+            v-for的语法结构：
+            <pre>
+                v-for="o in obj"
+                obj：对象
+                o： 属性值
+            </pre>
+            v-for对对象进行处理时，支持三个参数：
+            <pre>   
+                v-for="(o, a, i) in obj"
+                分别代表属性值、属性名、索引；
+            </pre>
+        </li>
+    </ol>
+    <h3>对象属性循环展示</h3>
+    <ul>
+        <li v-for="(o, a, i) in product">{{i+1}}，{{tdata[a]}}：{{o}}</li>
+    </ul>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            tdata:{
+                name1:'名称', 
+                nums:'销量', 
+                price:'价格', 
+                seller:'卖家', 
+            },
+            product:
+                {
+                    name1:'ins超火内增高运动鞋女韩版ulzzang原宿百搭2018春季新款休闲女鞋', 
+                    nums:10, 
+                    price:'120.5元', 
+                    seller:'运货鞋业'
+                }
+        }
+    });
+</script>
+</body>
+</html>

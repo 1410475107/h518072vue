@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-09-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>组件命名约定</h3>
+           <ol>
+                <li>my-add-com；</li>
+                <li>myCom</li>
+                <li>MyAppCom</li>
+                <li>html模板里面只能使用：my-add-com；</li>
+           </ol>
+           <keep-alive>
+                <component :is="usercom"></component>    
+           </keep-alive>
+        </div>
+
+        <script type="text/x-template" id="login">
+            
+        </script>
+
+        <script>
+            Vue.component('my-header', {
+                template:`<div v-once>
+                            <slot name="notice">{{action}}</slot>
+                            <slot name="menu">
+                                <ul>
+                                    <li>注册</li>
+                                    <li>登录</li>
+                                    <li>找回密码</li>
+                                </ul>
+                            </slot>
+                            <slot>默认的</slot>    
+                        </div>`,
+                data:function () {
+                    return  {
+                        action:'登录消费录'
+                    }; 
+                }
+            });
+
+            Vue.component('my-footer', {
+                template:`  <div>版权信息@2018</div>`,
+                data:function () {
+                    return  {}; 
+                }
+            });
+
+            Vue.component('my-left', {
+                template:`  <div>left</div>`,
+                data:function () {
+                    return  {}; 
+                }
+            });
+
+            let v = new Vue({
+                el:'.container',
+                data:{
+                    usercom:'my-header'
+                },
+                methods:{
+                },
+                mounted:function () {
+                    console.log(this);
+                },
+                updated:function () {
+                    console.log(this);
+                }
+            });
+        </script>
+    </body>
+</html>

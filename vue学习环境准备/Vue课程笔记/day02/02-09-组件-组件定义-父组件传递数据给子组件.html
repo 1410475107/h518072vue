@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-09-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <script src="./js/myvue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <my-page-header></my-page-header>
+       <h3>组件</h3>
+       <ol>
+           <li>组件里面提供数据必须是函数；</li>
+           <li>全局组件的定义一定要在new Vue之前定义好</li>
+           <li></li>
+       </ol>
+       <my-page-footer mydata="number" :number_f="number"></my-page-footer>   
+    </div>
+</body>
+</html>

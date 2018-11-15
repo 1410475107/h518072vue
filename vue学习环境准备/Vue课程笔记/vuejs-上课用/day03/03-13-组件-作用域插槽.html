@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-13-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>作用域插槽</h3>
+    <ol>
+        <li>在父组件中使用<code>slot-scope</code>属性接收子组件传递过来的prop对象；</li>
+        <li>作用域插槽常用于列表展示</li>
+    </ol>
+    <div>
+        <h4>登录和没登录的时候菜单不一样</h4>
+    </div>
+    <div class="myclass">
+        <myapp-header>
+            <template slot-scope="childProps">
+                <b>哎哟，会不会显示那？</b>
+                <h2>我来自何方？----{{childProps.yourname}}</h2>
+            </template>
+        </myapp-header>
+    </div>
+
+    <h3>菜单列表</h3>
+    <myapp-menu :menus="menus" v-show="login">
+        <li slot="menus" slot-scope="menuprops"><a :href="menuprops.href" :style="{fontWeight:menuprops.b}">{{menuprops.menuname}}</a></li>
+    </myapp-menu>
+
+</div>
+<script>
+    //理解作用域插槽
+    Vue.component('myapp-header',{
+        template:`<div class="child_com"><slot :yourname="name"></slot></div>`,
+        data:function () {
+            return {
+                name:'孩子组件'
+            };
+        }
+    });
+
+    //作用域插槽：列表组件
+    Vue.component('myapp-menu',{
+        props:['menus'],
+        template:`
+                    <ul>
+                        <slot name="menus" v-for="m in menus" :menuname="m.name" :menuhref="m.href" :b="m.b">
+                        </slot>
+                    </ul>
+                    `,
+        data:function () {
+            return {
+                name:'孩子组件'
+            };
+        }
+    });
+
+    let v = new Vue({
+        el:'.container',
+        data:{
+            ad:true,
+            login:true,
+            menus:[{href:'#1', name:'我的订单', b:'bolder'}, {href:'#2', name:'个人设置'}, {href:'#3', name:'购物车'}]
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-04-02-混入</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>全局混入对象影响所有的Vue实例</h3>
+    <ol>
+        <li>如果属性或函数名相同，则最终取的是组件的属性或方法;</li>
+        <li>钩子函数也是组件的执行在后；</li>
+        <li>也就是说，实际上组件和混入对象的方法都是执行的，只是顺序而已；</li>
+        <li>如果加入多个混入对象，则按添加顺序执行；</li>
+        <li>如果属性名不同，则直接合并；</li>
+
+    </ol>
+    <app-login ref="mylogin"><span v-html="mydata"></span></app-login>
+</div>
+<script>
+    //定义一个混入对象
+    let appwarn = {
+        created: function(){
+            console.log(2);
+            this.mydata = '数据库机房断电，预计<code>03.08 18:00</code>恢复，请耐心等待~~~';
+        },
+        data:function(){
+            return {
+                mydata1:'新的属性数据'
+            };
+        }
+    };
+
+    let appwarn1 = {
+        created: function(){
+            console.log(3);
+            this.mydata = '乱公告玩啊~~~';
+        }
+    };
+    //定义全局混入对象的方法
+    Vue.mixin({
+        updated:function(){
+            console.log('数据调试中...');
+        }
+    });
+
+    //Vue实例
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login',
+            mydata:''
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        components:{
+            'app-login':{
+                template:`
+                    <form>
+                    <slot>定义一个插槽</slot>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" v-model="myemail">
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`,
+                data:function(){
+                    return {
+                        mydogname:'谢谢',
+                        myemail:'1410475107@qq.com'
+                    };
+                },
+                methods:{
+                    checkdata:function(){
+                        let email  =document.querySelector('#exampleInputEmail1');
+                        if(!email.value){
+                            email.value = '请输入邮箱';
+                            console.log('123');
+                            return  ;
+                        }
+                    }
+                }
+            }
+        },
+        created:function(){
+            console.log(1);
+            this.mydata = '祝各位新年快乐！';
+            console.log(this.$data);
+
+        },
+        updated:function(){
+            console.log('数据调试中...');
+        },
+        mixins:[appwarn1, appwarn]
+    });
+
+
+</script>
+</body>
+</html>

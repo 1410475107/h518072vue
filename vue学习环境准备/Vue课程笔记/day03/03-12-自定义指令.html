@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-12-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>组件命名约定</h3>
+           <ol>
+               <li>自定义指令的名字的在定义的时候不需要v-;</li>
+               <li></li>
+           </ol>
+            <my-header></my-header>
+            <input type="text" v-myfocus="my">
+        </div>
+        <div class="myclass">
+            <input type="text" v-myfocus="my">
+        </div>
+        <script>
+            //directive：定义一个全局指令
+            Vue.directive('myfocus', {
+                inserted:function (myel, binding) {
+                    myel.focus();
+                    console.log(binding.value);
+
+                },
+                update:function (el) {
+                    el.style.backgroundColor = '#f2e';
+                },
+                unbind:function (el) {
+                    el.style.backgroundColor = '#c3a';
+                },
+                bind:function (el) {
+                    el.style.backgroundColor = '#11e';
+                }
+            });
+
+            Vue.component('myHeader', {
+                template:`
+                            <input name="a" v-if="showme" :value="myemail" type="text" v-myfocus>
+                            <input name="b" v-else type="text">
+                            `,
+                data:function () {
+                    return  {
+                        myemail:'1410475107@qq.com',
+                        showme:true
+                    }; 
+                },
+                methods:{
+                    mfun(){
+                        console.log('123');
+                    }
+                }
+            });
+
+            let v = new Vue({
+                el:'.container',
+                data:{
+                    my:'myvalue'
+                },
+                methods:{
+                }
+            });
+
+
+            let v1 = new Vue({
+                el:'.myclass',
+                data:{
+                    my:'outdiv'
+                },
+                methods:{}
+            });
+        </script>
+    </body>
+</html>

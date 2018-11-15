@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-06-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>vue的模板基于HTML</h3>
+    <ol>
+        <li>基于HTML，也就是说以前你用HTML写的页面，可以直接拿来使用，赞；</li>
+        <li>开发者可以把DOM和vue实例的数据绑定起来，无需自己再进行DOM操作；</li>
+        <li>JS性能一般没有问题，主要出现在DOM操作上；vue则采用虚拟DOM的方式，智能的计算出DOM最少操作次数，这就很大的提升了DOM操作效率及JS代码运行效率；</li>
+    </ol>
+
+    <h3>支持的值类型</h3>
+    <ol>
+        <li>
+            文本： <br>
+            使用双大括号，{{message}}  <br>
+            默认情况下，只要vue实例的message属性的值发生改变，插值处的内容都会更新；  <br>
+            {{message}}会将数据解释为普通文本，这在要插入html内容时就会出问题；
+        </li>
+        <li>
+            HTML：很明显，很多时候我们需要插入HTML代码 <br>
+            vue提供了v-html指令来解决这个问题：<span v-html="myhtml"></span>；<br>
+            这个span的内容将被替换成属性值myhtml，直接作为HTML，不会解析属性值中的数据绑定；
+        </li>
+    </ol>
+    <div id="s">姓名：{{name}}，年龄：{{age}}，身高：{{height}}</div>
+    <div class="html" v-html="myhtml">内容将会被替换</div>
+</div>
+<script>
+    //文本案例
+    const objdata   = {name:'苟洁', age:20, height:170};
+
+    //创建一个Vue实例
+    let   vue1      = new Vue({
+        el:'#s',
+        data:objdata
+    });
+
+    //html例子
+    
+    let htmldata = {
+        myhtml:
+        '<ul>\
+            <li>追加内{{message}}容1</li>\
+            <li>追加内{{message}}容2</li>\
+            <li><span style="color:red">追加</span>内{{message}}容3</li>\
+        </ul>'
+    };
+    //保留原始内容并追加新的内容
+    let vue2    = new Vue({
+        el:'.container .html',
+        data:{
+            myhtml:'<ul>\
+                    <li>追加内{{message}}容1</li>\
+                    <li>追加内{{message}}容2</li>\
+                    <li><span style="color:red">追加</span>内{{message}}容3</li>\
+                </ul>',
+            message:'2'
+        },
+        beforeMount:function () { //生命周期钩子函数
+            console.log(this.$el.innerText);
+            console.log(this.$data.myhtml);
+            this.$data.myhtml = this.$el.innerText + this.$data.myhtml;
+        }
+    });
+</script>
+</body>
+</html>

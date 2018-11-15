@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-10-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>组件命名约定</h3>
+            <my-header ref="my123"></my-header>
+        </div>
+        <script>
+            Vue.component('myHeader', {
+                template:`<div v-once>
+                            <slot name="notice">{{action}}</slot>
+                            <slot name="menu">
+                                <ul>
+                                    <li>注册</li>
+                                    <li>登录</li>
+                                    <li>找回密码</li>
+                                </ul>
+                            </slot>
+                            <slot>默认的</slot>    
+                        </div>`,
+                data:function () {
+                    return  {
+                        action:'登录消费录'
+                    }; 
+                },
+                methods:{
+                    mfun(){
+                        console.log('123');
+                    }
+                }
+            });
+
+            let v = new Vue({
+                el:'.container',
+                data:{
+                    usercom:'my-header'
+                },
+                methods:{
+                    mfun(){
+                        console.log('外部组件');
+                    }
+                },
+                mounted:function () {
+                    console.log(this);
+                },
+                updated:function () {
+                    console.log(this);
+                }
+            });
+            v.mfun();
+            v.$refs.my123.mfun();
+            console.log(v.$refs.my123.action);
+            console.log(v.$refs.my123);
+        </script>
+    </body>
+</html>

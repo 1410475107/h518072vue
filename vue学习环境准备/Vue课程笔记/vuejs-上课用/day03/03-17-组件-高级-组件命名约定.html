@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-17-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>组件命名约定</h3>
+    <ol>
+        <li>当注册组件或prop时，可用 
+            <pre>
+                短横线分隔：myapp-footer；
+                驼峰式：myappFooter；
+                单词首字母大写：、MyappFooter；
+            </pre>
+        </li>
+        <li>在HTML模板中使用短横线分隔：myapp-footer；</li>
+    </ol>
+    <app-login ref="mylogin"></app-login>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login'
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        components:{
+            'app-login':{
+                template:`
+                    <form>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`,
+                data:function(){
+                    return {mydogname:'谢谢'};
+                },
+                methods:{
+                    checkdata:function(){
+                        let email  =document.querySelector('#exampleInputEmail1');
+                        if(!email.value){
+                            email.value = '请输入邮箱';
+                            console.log('123');
+                            return  ;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

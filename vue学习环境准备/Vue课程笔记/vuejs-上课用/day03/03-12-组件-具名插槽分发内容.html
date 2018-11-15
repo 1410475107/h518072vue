@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-12-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>具名插槽，也就是有具体名字的插槽</h3>
+    <ol>
+        <li>插槽可以设置属性name来表示当前插槽的名称；</li>
+        <li>给多个插槽不同的名字，父组件通过设置slot属性来匹配对应的插槽并替换其默认内容；</li>
+        <li>你当然可以设置一个或多个没有name属性的插槽，作为默认插槽；</li>
+        <li>多个默认插槽容易引起混乱，一般一个就够了，也就是上面说的单个插槽；</li>
+    </ol>
+    <div>
+        <h4>登录和没登录的时候菜单不一样</h4>
+    </div>
+    <myapp-header>
+        <template v-if="ad">
+            <img slot="ad" src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2067495377/TB1s8qdo26H8KJjSspmXXb2WXXa_!!0-item_pic.jpg_250x250.jpg_.webp" alt="">
+        </template>
+        <template v-if="login">
+            <li v-for="m in menus" slot="banner"><A :href="m.href">{{m.name}}</A></li>
+        </template>
+        <div>京公网安备11000002000001号</div>
+    </myapp-header>
+</div>
+<script>
+    Vue.component('myapp-header',{
+        template:`  <div>
+                        <slot name="ad">
+                            <div class="ad">广告位</div>
+                        </slot>
+                        <ul>
+                            <slot name="banner">
+                                <li>
+                                    <a href="">菜单1</a>
+                                </li>
+                                <li>
+                                    <a href="">菜单2</a>
+                                </li>
+                                <li>
+                                    <a href="">菜单3</a>
+                                </li>
+                            </slot>
+                        </ul>
+                        <slot></slot>
+                    </div>`,
+        data:function () {
+            return {
+                
+            };
+        }
+    });
+
+    let v = new Vue({
+        el:'.container',
+        data:{
+            ad:true,
+            login:true,
+            menus:[{href:'#1', name:'我的订单'}, {href:'#2', name:'个人设置'}, {href:'#3', name:'购物车'}]
+        }
+    });
+</script>
+</body>
+</html>

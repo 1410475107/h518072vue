@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-02-条件渲染</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>实现多条件判断</h3>
+    <ol>
+        <li>v-if；</li>
+        <li>v-else-if；</li>
+        <li>v-else；</li>
+    </ol>
+    
+    <template v-if="news === 'news'">
+        <h3>时事新闻</h3>
+        <ul>
+            <li>时事新闻列表标题1</li>
+            <li>时事新闻列表标题2</li>
+            <li>时事新闻列表标题3</li>
+            <li>时事新闻列表标题4</li>
+            <li>时事新闻列表标题5</li>
+        </ul>
+    </template>
+    <template v-else-if="news === 'play'">
+       <h3>娱乐新闻</h3>
+        <ul>
+            <li>娱乐新闻列表标题1</li>
+            <li>娱乐新闻列表标题2</li>
+            <li>娱乐新闻列表标题3</li>
+            <li>娱乐新闻列表标题4</li>
+            <li>娱乐新闻列表标题5</li>
+        </ul>
+    </template>
+    <template v-else>
+       <h3>体育运动</h3>
+        <ul>
+            <li>体育新闻列表标题1</li>
+            <li>体育新闻列表标题2</li>
+            <li>体育新闻列表标题3</li>
+            <li>体育新闻列表标题4</li>
+            <li>体育新闻列表标题5</li>
+        </ul>
+    </template>
+
+    <button @click="shownews('news')">时事新闻</button>
+    <button @click="shownews('play')">娱乐新闻</button>
+    <button @click="shownews('sports')">体育运动</button>
+
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            news:'play'
+        },
+        methods:{
+            shownews:function (t) {
+                this.news = t;
+            }
+        }
+    });
+</script>
+</body>
+</html>

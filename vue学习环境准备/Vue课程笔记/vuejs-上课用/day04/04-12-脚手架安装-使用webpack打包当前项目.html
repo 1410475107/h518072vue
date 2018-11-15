@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-04-12-webpack打包当前项目</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+        .img{
+            width: 230px;
+            height: 230px;
+        }
+        .plist{
+            width: 230px;
+            height: 300px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>把当前项目打包成上线项目</h3>
+    <ol>
+        <li>在项目文件夹下的config/index中定义了assetsRoot的值，表示项目打包到的路径；</li>
+        <li>在项目目录下运行:npm run build</li>
+    </ol>
+</div>
+</body>
+</html>

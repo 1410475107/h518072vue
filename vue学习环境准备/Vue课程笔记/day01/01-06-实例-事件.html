@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-06-事件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>事件；</h3>
+        <ol>
+            <li>v-on：绑定事件指令；</li>
+            <li>事件的处理函数定义在methods对象里面；</li>
+            <li>vue里面提供了一个特殊变量:$event</li>
+        </ol>
+        <!-- vue里面提供了一个特殊变量:$event -->
+        <div class="myclass" v-on:click="changclass('listclass', $event)">点击修改样式</div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            methods:{
+                //事件处理函数
+                changclass:function (classname, e) {
+                    console.log(e);
+                    e.target.className = classname;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

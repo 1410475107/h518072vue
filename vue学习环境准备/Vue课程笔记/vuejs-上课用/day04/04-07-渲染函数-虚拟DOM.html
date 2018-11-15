@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-04-07-渲染函数</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+        .img{
+            width: 230px;
+            height: 230px;
+        }
+        .plist{
+            width: 230px;
+            height: 300px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>虚拟DOM：virtual DOM，简称：VNode</h3>
+    <ol>
+        <li>DOM元素非常庞大，页面性能一般不会说是JS引起的，主要就是DOM操作引起的；</li>
+        <li>简单理解前端工作的话，基本就是DOM操作，各种增删查改及效果修饰；像React、angular都是支持虚拟DOM操作的，Vue2.0开始也是如此；</li>
+        <li>虚拟DOM的核心思想：对复杂的DOM文档结构，提供一种方便的工具，进行最小化的文档操作；</li>
+    </ol>
+</div>
+<script>
+    //渲染一个节点
+    let vm = new Vue({
+        el:'.container',
+        data:{message:'我的数据内容'},
+        render(){
+            console.log(this);
+            var n = this.$createElement;
+            let node = n(
+                'div',
+                {attrs:{class:'myclass'}},
+                this.message
+            );
+            //打印出来是VNode
+            console.log(node);
+        }
+    });
+</script>
+</body>
+</html>

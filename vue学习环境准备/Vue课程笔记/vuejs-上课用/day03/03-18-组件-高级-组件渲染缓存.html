@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-18-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>渲染缓存是为了效率更提升一步</h3>
+    <ol>
+        <li>当组件中包含的内容主要是静态内容并且很大时可以考虑使用v-once把渲染结果缓存起来;</li>
+        <li>此时数据就没有了实时响应了，所以要不要缓存要看你的数据是不是需要实时响应；</li>
+    </ol>
+    <app-login ref="mylogin"></app-login>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login'
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        components:{
+            'app-login':{
+                template:`
+                    <form v-once>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" :value="myemail">
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`,
+                data:function(){
+                    return {
+                        mydogname:'谢谢',
+                        myemail:'1410475107@qq.com'
+                    };
+                },
+                methods:{
+                    checkdata:function(){
+                        let email  =document.querySelector('#exampleInputEmail1');
+                        if(!email.value){
+                            email.value = '请输入邮箱';
+                            console.log('123');
+                            return  ;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-07-简写</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>简写；</h3>
+        <ol>
+            <li>v-on：==》@ </li>
+            <li>v-bind：==》:</li>
+        </ol>
+        <!-- vue里面提供了一个特殊变量:$event -->
+        <div class="myclass" :class="myclass" @click="changclass('listclass', $event)">点击修改样式</div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                myclass:'newclass'
+            },
+            methods:{
+                //事件处理函数
+                changclass:function (classname, e) {
+                    console.log(e);
+                    e.target.className = classname;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

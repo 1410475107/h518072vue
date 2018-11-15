@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-13-计算属性</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>计算属性</h3>
+    <ol>
+        <li>模板内的表达式适合于比较简单的运算，如果模板中加入过多的逻辑操作，很明显不符合模板的设计初衷，即模板是拿来显示效果的，不是进行逻辑运算的；</li>
+        <li>为了解决这个问题，vue提出了使用计算(computed)属性；</li>
+        <li>注意：计算属性是基于它们的依赖进行缓存的，只有他依赖的属性发生改变时，才会重新计算，否则就直接返回之前的结果，而不必再次执行函数；</li>
+        <li>如果采用调用方法的方式，则每次都会重新执行函数，不会有缓存；</li>
+    </ol>
+    <!--文本模板 -->
+    <div class="showme myclass">{{message}}</div>
+    <!-- 内容反转 -->
+    <div class="showme myclass">{{message.split('').reverse().join('')}}</div>
+    <!-- 模板业务逻辑不适合太重，使用计算属性 -->
+    <div class="showme myclass">{{message_reverse}}1</div>
+    <!-- 看计算属性执行了多少次 -->
+    <div class="showme myclass">{{message_reverse}}2</div>
+    <div class="showme myclass">{{message_reverse}}3</div>
+
+    <!-- 在表达式中调用方法可以实现同样的效果，但是没有缓存 -->
+    <div class="showme myclass">{{method_message_reverse()}}1</div>
+    <!-- 看方法调用执行了多少次 -->
+    <div class="showme myclass">{{method_message_reverse()}}2</div>
+    <div class="showme myclass">{{method_message_reverse()}}3</div>
+
+
+</div>
+<script>
+    let vm = new Vue({
+        el:'.container',
+        data:{
+            message:'面朝大海，春暖花开，无限流量，可点外卖'
+        },
+        // 计算属性
+        computed:{
+            message_reverse:function () {
+                //this指向vm实例
+                console.log(1);
+                return this.message.split('').reverse().join('');
+            }
+        },
+        methods:{
+            method_message_reverse:function () {
+                //this指向vm实例
+                console.log(2);
+                return this.message.split('').reverse().join('');
+            }
+        }
+    });
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-08-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>使用$on和$emit实现非父子间数据传递</h3>
+
+    <first-com></first-com>
+    <second-com></second-com>
+    <third-com></third-com>
+
+    
+</div>
+<script>
+    let myVue = new Vue();
+    //定义一个组件
+    let first = {
+        template:`
+                    <div>
+                    <div>我的第一个组件：{{first}}</div>
+                    <button @click = 'send2third'>传递数据给兄弟</button></div>
+                `,
+        data:function(){
+            return {
+                first:'组件一传值'
+            };
+        },
+        methods:{
+            send2third:function(){
+                myVue.$emit('first-message', this.first);
+            }
+        }
+    };
+
+    //定义第二个组件的主题部分
+    let second = {
+        template:`  <div>
+                    <div>我是第二个组件：{{second}}</div>
+                    <button @click = "send2third">传递数据给兄弟</button></div>
+                `,
+        data:function(){
+            return {
+                second:'组件二的数据'
+            };
+        },
+        methods:{
+            send2third:function(){
+                myVue.$emit('second-message', this.second);
+            }
+        }
+    };
+    //定义第三个接收数据的组件
+    let third = {
+        template:`<div>
+                接收first的数组：<b>{{first}}</b>，
+                接收second的数组：<b>{{second}}</b>
+            </div>`,
+        data:function(){
+            return {
+                first:'',
+                second:''
+            };
+        },
+        mounted:function(){
+            myVue.$on('first-message', function(a){
+                console.log(this);
+                this.first = a;
+            }.bind(this));
+            myVue.$on('second-message', function(a){
+                this.second = a;
+            }.bind(this));
+        }
+    };
+
+    //创建实体对象
+    window.onload = function(){
+        new Vue({
+            el:'.container',
+            components:{
+                'first-com':first,
+                'second-com':second,
+                'third-com':third
+            },
+            mounted:function(){
+                console.log(this);
+            }
+        });
+    }
+</script>
+
+
+</body>
+</html>

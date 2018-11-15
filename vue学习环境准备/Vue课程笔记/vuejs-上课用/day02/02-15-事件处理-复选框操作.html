@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-15-事件处理</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>复选框一样支持v-model</h3>
+    <ol>
+        <li>单个复选框，绑定到布尔值;</li>
+        <li>多个复选框，绑定到数组;</li>
+    </ol>
+    <div>
+        <!-- 可以通过值绑定设置默认值 -->
+        邮件订阅：<input type="checkbox" value="user" v-model="accept" name="accept" true-value='yes' false-value='no'>
+        <span>{{accept === 'yes' ? '已订阅邮件':'没有订阅邮件'}}</span>
+    </div>
+    <div>
+        个人爱好：
+            <input type="checkbox" name="hony" v-model="myhoney" value="爱好1" id="">爱好1
+            <input type="checkbox" name="hony" v-model="myhoney" value="爱好2" id="">爱好2
+            <input type="checkbox" name="hony" v-model="myhoney" value="爱好3" id="">爱好3
+            <input type="checkbox" name="hony" v-model="myhoney" value="爱好4" id="">爱好4
+            <input type="checkbox" name="hony" v-model="myhoney" value="爱好5" id="">爱好5
+        <br>
+        我的爱好有：<span>{{myhoney.join('，')}}</span>
+    </div>
+</div>
+<script>
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+           accept:false,
+           myhoney:[]
+        }
+    });
+    //设置默认值
+    v1.accept = 'yes';
+</script>
+</body>
+</html>

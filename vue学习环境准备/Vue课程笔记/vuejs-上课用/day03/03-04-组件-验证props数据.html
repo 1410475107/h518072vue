@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-04-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>可以为props传递的数据指定验证规则</h3>
+    <ol>
+        <li>如果传入的数据不符合要求，Vue会发出警告，这对别人在使用组件时非常有用；</li>
+        <li>如果要验证，props需要使用对象类型，而不再是数组；</li>
+    </ol>
+    <input type="text" name="" id="" v-model.number.lazy="years"> <br>
+    <input type="text" name="" id="" v-model="companys"><br>
+    <input type="text" name="" id="" v-model.lazy="reg"><br>
+
+    <!-- 注意加不加冒号(:)，也就是v-bind的区别 -->
+    <my-tag-here :dateyears="years" :company="companys" :reg-number='reg'></my-tag-here>
+</div>
+<script>
+    //注册个全局组件
+    Vue.component('my-tag-here',{
+        props:{
+            dateyears:{
+                //类型检查
+                type:Number,
+                //自定义函数
+                validator: function (value) {
+                    return value > 2016;
+                }
+            }, 
+            company:{
+                type:String,
+                required:true
+            }, 
+            regNumber:{
+                type:String,
+                validator: function (value) {
+                    return value.length;
+                }
+            }
+        },
+        template:'<div>版权所有@{{dateyears}}-{{company}}-{{regNumber}}</div>'
+    });
+    //创建vue实例
+    let v2 = new Vue({
+        el:'.container',
+        data:{
+            years:2018,
+            companys:'四小组',
+            reg:'川公网安备 51010402056051号'
+        }
+    });
+</script>
+</body>
+</html>

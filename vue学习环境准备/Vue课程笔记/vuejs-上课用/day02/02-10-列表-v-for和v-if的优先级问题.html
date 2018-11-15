@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-10-循环列表</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+        .plist{
+            width: 230px;
+            height: 300px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-for和v-if的优先级</h3>
+    <ol>
+        <li>当他们处在同一个元素节点时，v-for 的优先级比 v-if 高；</li>
+        <li>如果你需要用v-if来控制是否v-for，需要把v-if作为v-for父级；</li>
+    </ol>
+    <h3>有起始值的范围</h3>
+    <ul>
+        <li v-for="i in n" v-if="i >= 3">{{i}}</li>
+    </ul>
+    <h3>如果有产品信息才循环</h3>
+    <ul v-if="products.length">
+        <template v-for="p in products">
+            <li class="plist">
+                <div class="img"><img v-bind:src="p.src" alt=""></div>
+                <div>{{p.name}}</div>
+                <div>销量：{{p.nums}}&nbsp;&nbsp;价格：{{p.price}}</div>
+            </li>
+        </template>
+    </ul>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            n:5,
+            products:[
+                {id:1, price:'26.3￥', src:'https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i4/34089671/TB281eClgfH8KJjy1zcXXcTzpXa_!!0-saturn_solar.jpg_230x230.jpg_.webp', name:'ins超火内增高运动鞋女韩版ulzzang原宿百搭2018春季新款休闲女鞋', nums:10},
+                {id:2, price:'56.3￥', src:'https://g-search2.alicdn.com/img/bao/uploaded/i4/i8/TB1y8BfXKOSBuNjy0FdYXHDnVXa_M2.SS2_230x230.jpg_.webp', name:'正品低帮帆布鞋女鞋GD同款vansιicea万斯利亚经典款男鞋滑板鞋潮', nums:38},
+                {id:3, price:'92.0￥', src:'https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/2194341351/TB1gw5uXTdYBeNkSmLyXXXfnVXa_!!0-item_pic.jpg_230x230.jpg_.webp', name:'大喜自制2017秋冬新款纯色百搭头层猪皮方跟麂皮绒过膝长靴女鞋子', nums:46},
+                {id:4, price:'63.3￥', src:'https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/1754810434/TB2_xMeduKAUKJjSZFzXXXdQFXa_!!1754810434.jpg_230x230.jpg_.webp', name:'岛上定制切尔西短靴春秋低跟英伦单靴真皮靴子圆头女鞋擦色裸靴冬', nums:61},
+                {id:5, price:'74.0￥', src:'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/1695220633/TB1ra6WXh1YBuNjy1zcXXbNcXXa_!!0-item_pic.jpg_230x230.jpg_.webp', name:'小白鞋2018新款百搭韩版德康万斯1992板鞋春季超火 ins帆布鞋女鞋', nums:109}
+            ]
+        }
+    });
+</script>
+</body>
+</html>

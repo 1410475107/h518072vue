@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-10-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>作用域</h3>
+    <ol>
+        <li>父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用域内编译；</li>
+    </ol>
+    <myapp-header v-show="myshow"></myapp-header>
+</div>
+<script>
+    Vue.component('myapp-header',{
+        template:'<div v-show="myshow">你能看到我吗？</div>',
+        data:function () {
+            return {
+                myshow: true
+            };
+        }
+    });
+
+    let v = new Vue({
+        el:'.container',
+        data:{
+            myshow:false
+        }
+    });
+</script>
+</body>
+</html>

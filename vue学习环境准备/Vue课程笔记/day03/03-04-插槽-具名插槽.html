@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-04-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>插槽：slot</h3>
+           <ol>
+                <li>使用name属性给插槽定义具体的名字；</li>
+           </ol>
+           <my-header>
+                <!-- 包含一个子组件 -->
+               <my-copy ></my-copy>
+                <template v-if="ad">
+                    <img slot="notice" src="https://img.alicdn.com/imgextra/i1/14484040/TB2TwsRcQfb_uJjSsD4XXaqiFXa_!!0-saturn_solar.jpg_240x240.jpg" alt="">
+                </template>
+                <template v-if="login">
+                   <div>adsdasd</div>
+                   <ul slot="menu">
+                       <li>
+                           <a href="#">我的订单</a>
+                       </li>
+                       <li>
+                           <a href="#">个人设置</a>
+                       </li>
+                       <li>
+                           <a href="#">注销</a>
+                       </li>
+                   </ul>
+               </template>
+               <!-- 传递给默认插槽 -->
+               开学时间03-05
+               <div>你好，同学</div>
+           </my-header>
+        </div>
+        <script>
+            Vue.component('my-header', {
+                template:`  <div>
+                                <slot>默认的123</slot>
+                                <slot name="notice">默认的公告信息</slot>
+                                <slot name="menu">
+                                    <ul>
+                                        <li>注册</li>
+                                        <li>登录</li>
+                                        <li>找回密码</li>
+                                    </ul>
+                                </slot>
+                                <slot name="copy"></slot>
+                                <slot>默认的</slot>
+                                
+                            </div>`,
+                data:function () {
+                    return  {}; 
+                }
+            });
+
+            Vue.component('my-copy', {
+                template:`  <div>版权信息@2018-四小组</div>`,
+                data:function () {
+                    return  {}; 
+                }
+            });
+            let v = new Vue({
+                el:'.container',
+                data:{
+                    login:false,
+                    ad:false
+                },
+                methods:{
+                }
+            });
+        </script>
+    </body>
+</html>

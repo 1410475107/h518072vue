@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-09-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>vue的指令是v-作为前缀的特殊属性</h3>
+    <ol>
+        <li>一般情况下，指令属性的值是单个表达式；</li>
+        <li>当表达式的值发生改变时，其产生的影响将响应式的作用于DOM效果；</li>
+    </ol>
+    <!-- 根据show的值是true或false来决定是否显示该div -->
+    <div class="showme" v-if="show">你看到我了吗？</div>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            show:false
+        }
+    });
+</script>
+</body>
+</html>

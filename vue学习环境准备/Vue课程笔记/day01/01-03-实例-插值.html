@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-02-基础-MV*</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>插值：给元素节点插入内容；</h3>
+        <ol>
+            <li>{{}}；</li>
+        </ol>
+        <div class="myclass">姓名：{{username}}，年龄：{{age}}，身高：{{height}}</div>
+    </div>
+    <script>
+        //常量是不能修改的
+        const myname    = '鲁老师';
+        // myname          = '李雄';
+        let objdata     = {username:'蒋紹东', age:20, height:170};
+        //能不能阻止修改属性值？
+        Object.freeze(objdata); //禁止修改或者添加属性
+        
+        objdata.height  = 180;
+        let     vm      = new Vue({
+            el:'#app',
+            data:objdata
+        });
+
+    </script>
+</body>
+</html>

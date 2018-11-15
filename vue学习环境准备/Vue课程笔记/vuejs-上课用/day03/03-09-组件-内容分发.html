@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-09-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>组件的组合，也就是组件里面嵌套组件</h3>
+    <ol>
+        <li>父组件和子组件都有可能有自己的模板；</li>
+        <li>为了使组件可以组合，我们需要把父组件的内容和子组件的模板组合起来，这个过程称为：内容分发；</li>
+        <li>Vue实现了自己的内容分发API，使用插槽分发内容，对应的元素内容标签是slot；</li>
+    </ol>
+    <myapp-header>
+        <app-banner></app-banner>
+        <app-ad></app-ad>
+    </myapp-header>
+    
+</div>
+<script>
+    
+</script>
+</body>
+</html>

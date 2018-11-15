@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-11-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>单个插槽</h3>
+    <ol>
+        <li>子组件的模板至少包含一个slot，否则父组件的内容将会被丢弃；</li>
+        <li>当子组件的模板只有一个没有属性的插槽时，父组件传递的代码片段将替换插槽所在的DOM节点位置；</li>
+        <li>slot标签里面的内容是备用内容，也就是说父组件没有传递任何代码片段时，显示slot里面的内容；</li>
+    </ol>
+    <div>
+        <h4>登录和没登录的时候菜单不一样</h4>
+    </div>
+    <myapp-header>
+        <template v-if="login">
+            <li v-for="m in menus"><A :href="m.href">{{m.name}}</A></li>
+        </template>
+    </myapp-header>
+</div>
+<script>
+    Vue.component('myapp-header',{
+        template:`<ul>
+                    <slot>
+                        <li>
+                            <a href="">菜单1</a>
+                        </li>
+                        <li>
+                            <a href="">菜单2</a>
+                        </li>
+                        <li>
+                            <a href="">菜单3</a>
+                        </li>
+                    </slot>
+                </ul>`,
+        data:function () {
+            return {
+                
+            };
+        }
+    });
+
+    let v = new Vue({
+        el:'.container',
+        data:{
+            login:true,
+            menus:[{href:'#1', name:'我的订单'}, {href:'#2', name:'个人设置'}, {href:'#3', name:'购物车'}]
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-03-webpack</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>webpack打包css文件</h3>
+    <ol>
+        <li>
+        	配置文件的内容可以包含很多信息，以下配置包含了入口文件和输入路径：
+			<pre>
+				module.exports = {
+				    //入口文件的路径
+				    entry: “./src/main.js",
+				    output: {
+				        //打包后的文件存放的绝对路径
+				        path: __dirname + "/dist/js",
+				        //打包后输出文件的文件名
+				        filename: “bundle.js"
+				    }
+				}
+			</pre>
+			其中：
+			<pre>
+				entry属性用来设置入口文件，非常重要，webpack就是通过它来寻找其关联的模块的。
+				入口属性有三种写法：
+					1. String， 表示打包单个入口文件到一个文件。
+						如 entry: "./src/js/main.js",
+					2. String Array，表示打包多个入口文件到同一个文件。（不推荐使用）
+						如 entry: ["./src/main1.js", "./src/main2.js"]
+					3. Object，表示打包多个入口文件到不同文件。（扩展性高）
+						如 entry:{
+								pageOne: 	'./src/pageOne/index1.js',
+				        		pageTwo: 	'./src/pageTwo/index2.js',
+				        		pageThree: 	'./src/pageThree/index3.js'
+					    }
+			</pre>
+		</li>
+		<li>
+			output属性用来设置打包结果的输出路径。当只打包成一个文件时，就直接文件路径即可：
+			<pre>
+				filename: "bundle.js "
+			</pre>
+			如果需要打包成多个文件，文件名就要使用占位符：
+			<pre>
+				filename: "[name].js"
+			</pre>
+			其中我们常见的占位符：
+			<pre>
+				占位符：
+					[name]：会被entry对象中对应的key值替换，
+					[hash]：会被打包后的模块的hash值替换
+					[chunkhash]：会被打包之前的模块hash值替换。
+			</pre>
+		</li>
+		<li>
+			加载器的使用方式二（推荐）：在使用加载器loader的时候，我们也可以直接在webpack.config.js文件中进行配置：
+			<pre>
+				module.exports = {
+				    entry: __dirname + "/src/main.js",
+				    output: {
+					path: __dirname + "/dist/js",
+					filename: "bundle.js"
+				    },
+				    module: {
+				        rules: [{  //处理每一种文件都可以在rules数组中添加一个对象
+				            test: /\.css$/,   //用正则表达式匹配css文件
+				            use: [‘style-loader’, ‘css-loader’, ‘postcss-loader’]  //指定使用的加载器
+				        }]
+				    }
+				}
+			</pre>
+
+			配置文件中的加载器的use属性取值有三种:
+			<pre>
+				表示加载器名字的字符串；
+				对象，可以添加额外的属性；
+				装有多个加载器名字的字符串数组或装有多个加载器对象的对象数组；
+			</pre>
+		</li>
+    </ol>
+</div>
+<script>
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-01-基础-vue是什么</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>Vue,读音同view， 是一套用于构建用户界面的渐进式框架，可以自底向上逐层应用；</h3>
+    <ol>
+        <li>vue第一个版本发布于2014年2月，目前vue属于个人项目，作者尤雨溪，中国人；</li>
+        <li>vue把数据和DOM绑定起来，数据是响应式的，只要数据有变动，就会立即体现在页面上；</li>
+    </ol>
+    <!-- 永远的hello world！ -->
+    <div id="app">
+        {{ message }} <br>
+        {{desc}}
+    </div>
+
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World!',
+            desc:'开始学习vue了'
+        }
+    });
+    console.log(app);
+</script>
+</body>
+</html>

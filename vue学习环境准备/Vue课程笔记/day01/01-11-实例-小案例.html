@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-11-简写</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>产品列表</h3>
+        <ul id="plist">
+            <li v-for="p123 of pl" v-if="p123.nums > sellnum">{{p123.name}}，销量：{{p123.nums}}</li>
+        </ul>
+        <span>
+        超过
+            <input type="text" v-model="sellnum" @keyup="changesell">
+        销量的产品共有{{plen}}个，销量总数是{{totalnums}}</span>
+    </div>
+    <script>
+        let plist = [
+            {id:1, name:'ins超火内增高运动鞋女韩版ulzzang原宿百搭2018春季新款休闲女鞋', nums:10},
+            {id:2, name:'正品低帮帆布鞋女鞋GD同款vansιicea万斯利亚经典款男鞋滑板鞋潮', nums:38},
+            {id:3, name:'大喜自制2017秋冬新款纯色百搭头层猪皮方跟麂皮绒过膝长靴女鞋子', nums:46},
+            {id:4, name:'岛上定制切尔西短靴春秋低跟英伦单靴真皮靴子圆头女鞋擦色裸靴冬', nums:61},
+            {id:5, name:'小白鞋2018新款百搭韩版德康万斯1992板鞋春季超火 ins帆布鞋女鞋', nums:109}
+        ];
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                pl:plist,
+                sellnum:1,
+                plen:5,
+                totalnums:0
+            },
+            methods:{
+                changesell: function () {
+                    this.plen = document.querySelectorAll('#plist li').length;
+                    this.totalnums = 0;
+                    for (var i = 0; i < this.pl.length; i++) {
+                        if(this.pl[i].nums > this.sellnum){
+                            this.totalnums += this.pl[i].nums;
+                        }
+                    }
+                }
+            },
+
+            //生命周期钩子函数
+            mounted:function () {
+                for (var i = 0; i < this.pl.length; i++) {
+                    this.totalnums += this.pl[i].nums;
+                }
+                console.log('666');
+            },
+
+            created:function () {
+                console.log('执行顺序');
+                aaa++;
+                return ;
+            }
+        });
+    </script>
+</body>
+</html>

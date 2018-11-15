@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-11-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-on提供了事件修饰符，通过由点(.)表示的指令后缀来调用修饰符；</h3>
+    <ol>
+        <li>修饰符可以串联；</li>
+        <li>这里只是语法学习，更多的事件修饰符后面会学习到；</li>
+    </ol>
+
+    <!-- 来个事件修饰符试试 -->
+    <!-- self:只有在点击目标时触发，点击子代不触发事件 -->
+    <!-- once表示只执行一次 -->
+    <div class="myclass" v-on:click.self.once="reverstr">
+        <p>
+            {{message}}
+        </p>
+    </div>
+
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        //定义数据
+        data:{
+            message:'我是p标签的内容，对我进行反转'
+        },
+        //定义方法
+        methods:{
+            reverstr () {
+                this.message = this.message.split('').reverse().join('');
+            }
+        }
+    });
+</script>
+</body>
+</html>

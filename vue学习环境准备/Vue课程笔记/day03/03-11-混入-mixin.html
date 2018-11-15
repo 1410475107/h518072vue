@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-11-混入</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+            <h3>混入：mixin，混进来，加入;</h3>
+            <ol>
+                <li>mixin是对象</li>
+                <li>混入对象的函数先与实例里面对应的函数执行；</li>
+            </ol>
+            {{mydata}} {{mixdata}}
+            <button @click="myfun">点击测试</button>
+        </div>
+
+        <div class="myclass">{{mydata}}</div>
+        <script>
+            //定义一个全局混入
+            Vue.mixin({
+                updated:function(){
+                    console.log('数据更新');
+                }
+            });
+            let mixmounted = {
+                mounted:function(){
+                    console.log('元素数构建完成');
+                },
+                updated:function () {
+                    console.log('数据更新。。。局部混入');
+                },
+                data:{
+                    mixdata:'abc混入数据abc'
+                },
+                methods:{
+                    myfun(){
+                        console.log('混入对象...');
+                    }
+                }
+            };
+            let mixin2 = {
+                mounted:function(){
+                    console.log('元素数构建完成...1');
+                },
+                data:{
+                    mixdata1:'混入数据'
+                }
+            };
+            let v = new Vue({
+                el:'#app',
+                data:{
+                    mydata:'修改数据'
+                },
+                methods:{
+                    myfun(){
+                        console.log('内部对象...');
+                        console.log(this.$data);
+                    }
+                },
+                //定义的是局部混入
+                mixins:[mixmounted, mixin2]
+            });
+
+            let v1 = new Vue({
+                el:'.myclass',
+                data:{
+                    mydata:'另外一个实例'
+                },
+                updated:function () {
+                    console.log('数据更新。。。主组件-1');
+                }
+            });
+
+        </script>
+    </body>
+</html>

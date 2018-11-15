@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-05-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>插槽：slot</h3>
+           <ol>
+                <li>slot-scope接收slot传递过来的属性信息；</li>
+           </ol>
+           <my-header>
+               <div slot="notice" :mydata="login" slot-scope="myslot">{{login}}，{{myslot}}，{{myslot.mydata}}，{{myslot.title123}}
+               </div> 
+           </my-header>
+        </div>
+        <script>
+            Vue.component('my-header', {
+                template:`  <div>
+                                <slot id="asdasd" name="notice" value="456" :mydata="login" title123="123显示文本信息abc">默认的公告信息</slot>
+                                <slot name="menu">
+                                    <ul>
+                                        <li>注册</li>
+                                        <li>登录</li>
+                                        <li>找回密码</li>
+                                    </ul>
+                                </slot>
+                                <slot name="copy"></slot>
+                                <slot yourdogname="谢谢">默认的</slot>
+                            </div>`,
+                data:function () {
+                    return  {login:'内部登录'}; 
+                }
+            });
+
+            let v = new Vue({
+                el:'.container',
+                data:{
+                    login:'外部登录',
+                    ad:false
+                },
+                methods:{
+                }
+            });
+        </script>
+    </body>
+</html>

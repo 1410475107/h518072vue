@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-04-05-自定义指令</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>钩子函数支持的参数：el、binding、vnode、oldVnode</h3>
+    <ol>
+        <li>el：指令所绑定的元素，可以用来直接操作 DOM</li>
+        <li>
+            binding：对象，包含以下属性：
+            <pre>
+                name：指令名，不包括 v- 前缀。
+                value：指令的绑定值，例如：v-my-directive="1 + 1" 中，绑定值为 2；支持对象传值；
+                oldValue：指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。
+                expression：字符串形式的指令表达式。例如 v-my-directive="1 + 1" 中，表达式为 "1 + 1"。
+                arg：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为 "foo"。
+                modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。
+            </pre>
+        </li>
+        <li>vnode：Vue 编译生成的虚拟节点；</li>
+        <li>oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用；</li>
+        <li>需要注意的是，上面四个函数代表顺序，你可以修改参数的名字，也就是说如果第一个参数是binding，那么他代表的是“指令所绑定的元素”；</li>
+    </ol>
+    <app-login ref="mylogin"><span v-html="mydata"></span></app-login>
+</div>
+<script>
+    //定义一个混入对象
+    let appwarn = {
+        created: function(){
+            console.log(2);
+            this.mydata = '数据库机房断电，预计<code>03.08 18:00</code>恢复，请耐心等待~~~';
+        },
+        data:function(){
+            return {
+                mydata1:'新的属性数据'
+            };
+        }
+    };
+    //全局自定义指令：这里不要v-
+    Vue.directive('focus', {
+        //当当前节点插入到DOM时执行
+        //el代表当前节点
+        inserted:function(el){
+            el.focus();
+        }
+    });
+
+    //Vue实例
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login',
+            mydata:''
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        //支持自定义局部指令
+        directives:{
+            myfocus:{
+                update:function(myel){
+                    myel.style.backgroundColor = '#fd2';
+                }
+            }
+
+        },
+        components:{
+            'app-login':{
+                template:`
+                    <form>
+                    <slot>定义一个插槽</slot>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input v-if="showemail" type="email" class="form-control" id="email" @blur="myblur" v-myfocus v-model="myemail">
+                        <input v-else type="email" class="form-control" id="email" @blur="myblur" placeholder="邮箱" v-model="myemail">
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" v-focus placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`,
+                data:function(){
+                    return {
+                        mydogname:'谢谢',
+                        showemail:true,
+                        myemail:'1410475107@qq.com'
+                    };
+                },
+                methods:{
+                    checkdata:function(){
+                        let email  =document.querySelector('#email');
+                        if(!email.value){
+                            email.value = '请输入邮箱';
+                            console.log('123');
+                            return  ;
+                        }
+                    },
+                    myblur:function(e){
+                        this.showemail = false;
+                        this.myemail = '666@qq.com'
+                    }
+                },
+                //支持自定义局部指令
+                directives:{
+                    myfocus:{
+                        //不同的钩子函数在不同时期产生不同的结果
+                        update:function(myel, bindsdsad, vnode123, oldVnode321){
+                            console.log(myel);
+                            console.log(bindsdsad);
+                            console.log(vnode123);
+                            console.log(oldVnode321);
+                            myel.style.backgroundColor = '#fd2';
+                        },
+                        bind:function(myel){
+                            myel.style.backgroundColor = '#f12';
+                        },
+                        unbind:function(myel, bindsdsad, vnode123, oldVnode321){
+                            myel.style.backgroundColor = '#112';
+                        }
+                    }
+                }
+            }
+        },
+        created:function(){
+            this.mydata = '祝各位新年快乐！';
+        },
+        updated:function(){
+            console.log('数据调试中...');
+        },
+        mounted:function(){
+            document.querySelector('#email').setAttribute('v-myfocus', '');
+        },
+        mixins:[appwarn]
+    });
+
+
+</script>
+</body>
+</html>

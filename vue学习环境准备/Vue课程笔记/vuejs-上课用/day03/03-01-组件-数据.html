@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-01-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>注册的组件的data必须是函数</h3>
+    <my-tag-here></my-tag-here>
+</div>
+<script>
+    //注册个全局组件
+    Vue.component('my-tag-here',{
+        template:'<div>版权所有@{{dateyears}}-{{company}}</div>',
+        data:function () {
+            return {
+                dateyears:new Date().getFullYear(),
+                company:'华清远见'
+            };
+        }
+    });
+    let v2 = new Vue({
+        el:'.container',
+        data:{
+            companys:'华清远见'
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-01-条件渲染</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>有时需要一次隐藏多个元素</h3>
+    <ol>
+        <li>v-if是一个指令，必须绑定到元素上才行；</li>
+        <li>如果想切换多个元素时，需要把这多个元素使用template包裹起来；</li>
+    </ol>
+    
+    <template v-if="reg">
+        <h3>注册</h3>
+        <form action="">
+            注册表单
+        </form>
+    </template>
+    <template v-else>
+        <h3>登录</h3>
+        <form action="">
+            登录表单
+        </form>
+    </template>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            reg:true
+        }
+    });
+</script>
+</body>
+</html>

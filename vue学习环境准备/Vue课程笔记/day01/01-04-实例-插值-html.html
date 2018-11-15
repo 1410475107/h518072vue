@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-04-基础</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>插值；</h3>
+        <ol>
+            <li>v-html指令可以插入html代码；</li>
+        </ol>
+        <div class="myclass" v-html="students">原始内容</div>
+    </div>
+    <script>
+        let     vm      = new Vue({
+            el:'#app',
+            data:{
+               students:'<ul>\
+                            <li>学生1</li>\
+                            <li>学生2</li>\
+                            <li>学生3</li>\
+                        </ul>' 
+            }
+        });
+
+    </script>
+</body>
+</html>

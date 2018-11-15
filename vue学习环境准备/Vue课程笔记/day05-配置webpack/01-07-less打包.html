@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-07-less打包</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>Less打包</h3>
+    <ol>
+        <li>
+        	开发中常常会把Less文件编译成CSS代码。
+			Webpack需要下载专门处理less文件的加载器----less-loader。
+			<pre>
+				安装：npm install less-loader --save-dev
+			</pre>
+			如果没有安装过less模块，还需要安装less：
+			<pre>
+				npm install less --save-dev
+			</pre>
+			使用less-loader只需要在webpack.config.js中配置一下加载器即可：
+			<pre>
+				module: {
+			        rules: [{
+			            test: /\.less$/,
+			            use: [
+			                'style-loader', 'css-loader', 'postcss-loader', 'less-loader'
+			            ]
+			        }]
+				}
+			</pre>
+
+
+        </li>
+    </ol>
+</div>
+<script>
+    
+</script>
+</body>
+</html>

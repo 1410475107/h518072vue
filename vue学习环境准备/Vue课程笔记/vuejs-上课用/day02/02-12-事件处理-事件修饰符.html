@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-12-事件处理</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>修饰符是由点开头的指令后缀来表示的</h3>
+    <ol>
+        <li>事件修饰符是可以串联的，串联的顺序直接影响执行结果；</li>
+        <li>事件.stop：阻止单击事件继续传播</li>
+        <li>事件.prevent：阻止默认事件；</li>
+        <li>事件.capture：使用事件捕获模式添加事件监听器；</li>
+        <li>事件.self：只当在 event.target 是当前元素自身时触发处理函数；</li>
+        <li>事件.once：事件只触发一次；</li>
+    </ol>
+    <!-- cbg是下面定义的方法名 -->
+    <div class="myclass" :class="{plist:isUse}" @click.once="cbg">点击事件</div>
+
+    <div class="myclass" :style="bgc1" @click.self="cc(1, 'red', $event)"><p>把背景改为红色</p></div>
+    <div class="myclass" :style="bgc2" @click="cc(2, 'blue', $event)">把背景改为蓝色</div>
+</div>
+<script>
+    //点击事件结合样式操作，实现样式切换
+    let v = new Vue({
+        el:'.container',
+        data:{
+            isUse:0,
+            bgc1:{backgroundColor:'#d2f'},
+            bgc2:{backgroundColor:'#d2f'}
+        },
+        methods:{
+            cbg:function (e) {
+                this.isUse = !this.isUse;
+                console.log(e.target);
+                console.log(e.target.innerHTML);
+            },
+            cc:function (i, c, e) {
+                // this['bgc' + i] = {
+                //     backgroundColor:c
+                // }
+                //直接修改样式
+                e.target.style.backgroundColor = c;
+                console.log(e.target);
+            }
+        }
+    });
+</script>
+</body>
+</html>

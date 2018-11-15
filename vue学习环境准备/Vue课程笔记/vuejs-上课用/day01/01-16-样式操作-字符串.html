@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-16-样式操作</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>vue可以很方便的实现样式修改操作；</h3>
+    <ol>
+        <li>修改元素的class或者style属于属性操作，因此可以使用v-bind指令来实现；</li>
+        <li>v-bind通过表达式返回值来修改class或style的值，该值可以是字符串，也可以是数组或对象；</li>
+    </ol>
+
+    <div class="mydiv" v-bind:class="vueclass" :style="mysty">vue实现样式操作，默认mydiv是没有样式的；</div>
+</div>
+<script>
+    //简单的字符串直接修改class或style的值
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+            vueclass:'myclass',
+            mysty:'color:#FFF'
+        }
+    });
+</script>
+</body>
+</html>

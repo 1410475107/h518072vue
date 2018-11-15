@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-05-html-webpack-plugin</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>html-webpack-plugin</h3>
+    <ol>
+        <li>
+        之前的操作，我们是自己在dist目录下建立的index.html文件，然后手动引用生成的js等资源文件的。 <br>
+        当需要应用的链接过多时会比较麻烦。我们可以使用html-webpack-plugin插件来生成HTML文件并自动引用js文件。 <br>
+        npm命令安装：
+        	<pre>
+	        	npm install html-webpack-plugin --save
+			</pre>
+        </li>
+        <li>
+        	在配置文件导出的对象中添加plugins属性：
+        	<pre>
+	        	plugins: [
+				    new htmlWebpackPlugin(
+					    {
+					      filename: 'index.html',
+					      template: 'index.html',
+					      inject: true
+					    }
+				    ),
+				    new htmlWebpackPlugin(
+					    {
+					      filename: 'index1.html',
+					      template: 'index2.html',
+					      inject: true
+					    }
+				    )
+				]
+        	</pre>
+        	参数含义：
+        	<pre>
+				var options = {
+					filename: 'index1.html' ,   	//生成的html文件的名字，默认是index.html
+					template: 'index2.html',  	//指定生成html文件使用的模板的绝对路径，默认生成空文件
+					inject: 'head',      		//注入文档的哪个位置，有true，false，body，head四个取值。
+				}
+
+				inject
+					指定生成的js文件在html文件中引入的位置。
+					true/body：这两个值表示插入到html文件的body元素的底部。
+					head:表示插入到html文件的head元素中。
+					false：表示不在生成的html文件中引用生成的js文件
+				chunks / excludeChunks：
+					有多个入口文件被打包时，就会编译成多个js文件，chunks可以决定在html文件中都应用哪些js文件。
+					默认会引用全部。
+					excludeChunks的功能刚好相反，表示排除， 如下：
+					entry: {
+				        pageOne: './src/pageOne/index.js',
+				        pageTwo: './src/pageTwo/index.js',
+				        pageThree: './src/pageThree/index.js'
+					},
+					plugins: [
+				        new htmlWebpackPlugin({
+				            chunks: ["pageOne", "pageTwo"]
+				        })
+					]
+        	</pre>
+        	minify:
+        	<pre>	
+				html压缩生成的html文件。取值为一个配置对象，如：
+				var options = {  
+				        removeComments: true,	//是否清除HTML注释  
+				        collapseWhitespace: true,	//是否压缩HTML  
+				        removeScriptTypeAttributes: true,	//是否删除< script>的type="text/javascript"  
+				        removeStyleLinkTypeAttributes: true,	//是否删除< style>和< link>的type="text/css"  
+				        minifyJS: true,	//是否压缩页面JS  
+				        minifyCSS: true	//是否压缩页面CSS  
+				}; 
+				实例：
+        		new htmlWebpackPlugin(
+				    {
+				      filename: 'index.html',
+				      template: 'index.html',
+				      inject: true,
+					  minify:{
+						collapseWhitespace: true，
+						minifyJS: true
+						}
+				    }
+			    )
+        	</pre>
+        	
+
+        </li>
+        <li>
+        	html-webpack-plugin插件输出的路径和output的path一致，我们可以修改output属性，使html文件直接输出到dist/目录中
+        </li>
+    </ol>
+</div>
+<script>
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-19-样式操作</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>可以直接v-bind:style；</h3>
+    <ol>
+        <li>CSS属性名采用驼峰式(fontSize)或短横线分隔(font-size，此时要用单引号引起来)来命名；</li>
+        <li>style一样支持数组语法；</li>
+        <li>当:style使用需要添加浏览器引擎前缀的CSS属性时，如transform，Vue.js 会自动侦测并添加相应的前缀；</li>
+        <li>当提供多重值时，只会渲染数组中最后一个被浏览器支持的值；</li>
+    </ol>
+    <div class="mydiv" v-bind:style="{color:mycolor, fontFamily:ff, 'font-size':fz}">直接修改style样式值；</div>
+    
+    <!-- 让模板更清晰 -->
+    <div class="myclass" :style="mystyle">直接使用对象修改style会让模板看起来更清晰</div>
+
+    <!-- 也可以结合计算属性来 -->
+    <div class="myclass" :style="msty">直接使用计算属性</div>
+
+    <!-- 提供多重值：在chrome浏览器下，如果没有flex则使用-webkit-box -->
+    <div class="myd" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">多重值时，选中支持的值的最后一个</div>
+</div>
+<script>
+    //简单的字符串直接修改class或style的值
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+            mycolor:'#f00',
+            ff:'微软雅黑',
+            fz:30 + 'px',
+            mystyle:{
+                color:'#d00',
+                fontFamily:'楷体',
+                fontSize:'50px'
+            }
+        },
+        //使用计算属性来修改样式
+        computed:{
+            msty:function () {
+                return {
+                    color:'#dd0',
+                    fontFamily:'幼圆',
+                    fontSize:'40px',
+                    transform:'rotate(7deg)'
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

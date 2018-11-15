@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-04-条件渲染</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-show是切换元素的display</h3>
+    <ol>
+        <li>v-if 有更高的切换开销，v-show 有更高的初始开销</li>
+        <li>如果要实现非常频繁的切换，推荐使用v-show；</li>
+    </ol>
+    <h3>登录</h3>
+    <!-- 默认是复用同一个输入框的，只是修改输入框的属性 -->
+    <!-- 加上key属性，并赋值，则可以禁止复用，只要key的属性值不同即可 -->
+    <div v-show="login === 'id'"> 账号：<input type="text" name="username" id="username"></div>
+    <div v-show="login === 'email'"> 邮箱：<input type="text" name="email" id="email"></div>
+    <div v-show="login === 'tel'"> 手机：<input type="text" name="tel" id="tel"></div>
+    <div>密码：<input type="password" name="passwd" id="passwd" /></div>
+    
+    <button @click="shownews('id')">账号登录</button>
+    <button @click="shownews('email')">邮箱登录</button>
+    <button @click="shownews('tel')">手机号登录</button>
+
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            login:'id'
+        },
+        methods:{
+            shownews:function (t) {
+                this.login = t;
+            }
+        }
+    });
+</script>
+</body>
+</html>

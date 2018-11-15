@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-02-webpack</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>webpack打包css文件</h3>
+    <ol>
+        <li>
+        	webpack不能直接打包CSS文件。因此，想要打包CSS文件，就需要让它和某个JS文件产生关联。webpack打包时会将关联的文件一并打包。
+		</li>
+		<li>
+			js文件可以使用require，import，url等方式关联其它文件。
+			我们在main.js中加入如下代码，表示引用了main.css文件。
+			require("../css/main.css");
+		</li>
+		<li>
+			webpack只能处理JavaScript代码。
+			在打包时，发现了一个它不能处理的CSS文件。
+			因此我们需要用到文件对应的加载器loader。 <br>
+			比如处理CSS文件就要用到两个加载器：  
+			css-loader
+			style-loader
+		</li>
+		<li>
+			加载器的作用是：
+			将模块的源码进行转换成webpack可以识别的代码，使得webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，
+			比如说分析转换less为css，转换ES6为ES5等。
+		</li>
+		<li>
+			加载器的使用方式一：在关联时，在路径前加上加载器名字和感叹号。 <br>
+				require("style-loader!css-loader!../css/main.css");
+		</li>
+		<li>
+			修改代码之后再次打包：<br>
+  			webpack  src/js/main.js  dist/js/bundle.js； <br>
+  			main.js文件的代码和main.css代码都会被打包到bundle.js中。<br>
+			这样，我们只引入了一个脚本文件，却同时具备了脚本和样式。
+		</li>
+    </ol>
+</div>
+<script>
+    
+</script>
+</body>
+</html>

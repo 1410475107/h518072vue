@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-15-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>keep-alive就是把组件缓存起来</h3>
+    <ol>
+        <li>keep-alive作为component的<code>父级标签</code> 可以把对应的组件缓存到内存中；</li>
+    </ol>
+    <select class="form-control" v-model="whitch_com_used" @change="showme">
+          <option value="reg">注册</option>
+          <option value="login">登录</option>
+          <option value="findpwd">找回密码</option>
+    </select>
+    <keep-alive>
+        <component :is="whitch_com_used"></component>
+    </keep-alive>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login'
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        components:{
+            'login':{
+                template:`
+                    <form>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`
+            },
+            'reg':{
+                template:`
+                    <form>
+                    <h3>注册</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">确认密码</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">开始注册</button>
+                </form>`
+            },
+            'findpwd':{
+                template:`
+                    <form>
+                    <h3>找回密码</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-default">开始找回</button>
+                </form>`
+            }
+        }
+    });
+</script>
+</body>
+</html>

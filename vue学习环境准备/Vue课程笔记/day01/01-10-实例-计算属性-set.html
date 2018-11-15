@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-07-简写</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>计算属性；</h3>
+        <ol>
+            <li>v-model指令实现数据双向驱动；</li>
+            <li>计算属性定义在computed对象里面；</li>
+        </ol>
+        桌子数量：<input type="number" v-model="tableNums">  <br>
+        <div>{{tableNums}}</div>
+        你需要生成{{tableNums}}个桌子，需要{{legnums}}桌子腿
+    </div>
+    <script>
+        let vw = new Vue({
+            el:'#app',
+            data:{
+                legnums:0
+            },
+            //计算属性
+            computed:{
+                tableNums:{
+                    get:function () {
+                        return this.legnums / 4;
+                    },
+                    set:function (n) {
+                        this.legnums = n * 4;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

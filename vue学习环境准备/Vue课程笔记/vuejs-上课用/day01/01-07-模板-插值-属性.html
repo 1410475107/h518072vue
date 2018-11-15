@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-07-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>vue修改DOM的属性</h3>
+    <ol>
+        <li>{{}}语法不能直接作用于属性之上，此时需要使用v-bind指令；</li>
+    </ol>
+    <!-- 此时{{}}语法无效 -->
+    <div id="s" class="{{myclass}}">给盒子设置class属性值，失败</div>
+
+    <!-- 使用v-bind指令实现 -->
+    <div id="s1" v-bind:class="myclass">给盒子设置class属性值，成功</div>
+    
+    <button v-bind:disabled="ifdisabled">按钮失效</button>
+
+</div>
+<script>
+    //文本案例
+    const objdata   = {myclass:'showme show2'};
+
+    //创建一个Vue实例
+    let   vue1      = new Vue({
+        el:'#s',
+        data:objdata
+    });
+
+    //结合v-bind指令
+    let   vue2      = new Vue({
+        el:'#s1',
+        data:objdata
+    });
+
+    //让按钮disabled
+    let vue3 = new Vue({
+        el:'button',
+        data:{
+            // ifdisabled:null
+            // ifdisabled:undefined
+            // ifdisabled:false
+            ifdisabled:true
+        }
+    });
+
+    //深入理解Vue是数据驱动的，上面的代码我应该怎么改进？？？？
+</script>
+</body>
+</html>

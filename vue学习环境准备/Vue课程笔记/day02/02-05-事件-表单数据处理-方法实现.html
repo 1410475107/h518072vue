@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-05-表单</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .newclass{
+            background-color: #f2d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+       <h3>联动菜单</h3>
+       <select name="province" id="province" v-model="province" @change="getCity">
+           <option value="0">-请选择-</option>
+           <option v-for="p in pdata" :value="p.pid">{{p.name}}</option>
+       </select>
+       市区：
+       <select name="city" id="city" v-model="city">
+           <option value="0">-请选择-</option>
+           <option v-for="c in citys" :value="c.cid">{{c.cname}}</option>
+       </select>
+    </div>
+    <script>
+        let p = [
+                    {
+                        name:'四川', 
+                        pid:1, 
+                        citys:{
+                            fid:1,
+                            data:[
+                                {cname:'成都', cid:1001},
+                                {cname:'绵阳', cid:1002},
+                                {cname:'德阳', cid:1003},
+                                {cname:'达州', cid:1004}
+                            ]
+                        }
+                    },
+                    {
+                        name:'重庆', 
+                        pid:2, 
+                        citys:{
+                            fid:2,
+                            data:[
+                                {cname:'成都1', cid:2001},
+                                {cname:'绵阳1', cid:2002},
+                                {cname:'德阳1', cid:2003},
+                                {cname:'达州1', cid:2004},
+                                {cname:'达州1', cid:2005}
+                            ]
+                        }
+                    }
+                ];
+
+        let v = new Vue({
+            el:'#app',
+            data:{
+                pdata:p,
+                province:0,
+                city:'0',
+                citys:[]
+            },
+            methods:{
+                getCity(){
+                    this.citys = this.pdata[this.province-1].citys.data;
+                }
+            },
+            mounted: function(){
+                this.province   = 1;
+                this.citys      = this.pdata[this.province-1].citys.data;
+                this.city       = this.citys[0].cid;
+                console.log(this.city);
+            }
+        });
+    </script>
+</body>
+</html>

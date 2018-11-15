@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-04-03-自定义指令</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>Vue允许使用directive自定义指令</h3>
+    <ol>
+        <li>如果你需要对DOM进行一些效果操作，那么自定义指令就比较适合;</li>
+        <li>所谓的自定义指令就是定义v-model\v-bind\v-on等这些核心指令之外的指令；</li>
+        <li>可以想组件那样，自定义局部或全局指令；</li>
+    </ol>
+    <app-login ref="mylogin"><span v-html="mydata"></span></app-login>
+    <input type="text" class="form-control" v-myfocus>
+</div>
+<script>
+    //定义一个混入对象
+    let appwarn = {
+        created: function(){
+            console.log(2);
+            this.mydata = '数据库机房断电，预计<code>03.08 18:00</code>恢复，请耐心等待~~~';
+        },
+        data:function(){
+            return {
+                mydata1:'新的属性数据'
+            };
+        }
+    };
+    //全局自定义指令：这里不要v-
+    Vue.directive('focus', {
+        //当当前节点插入到DOM时执行
+        //el代表当前节点
+        inserted:function(el){
+            el.focus();
+        }
+    });
+    
+    //Vue实例
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login',
+            mydata:''
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        //支持自定义局部指令
+        directives:{
+            myfocus:{
+                inserted:function(myel){
+                    myel.style.backgroundColor = '#fd2';
+                }
+            }
+        },
+        components:{
+            'app-login':{
+                template:`
+                    <form>
+                    <slot>定义一个插槽</slot>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" v-myfocus placeholder="Email" v-model="myemail">
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" v-focus placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`,
+                data:function(){
+                    return {
+                        mydogname:'谢谢',
+                        myemail:'1410475107@qq.com'
+                    };
+                },
+                methods:{
+                    checkdata:function(){
+                        let email  =document.querySelector('#exampleInputEmail1');
+                        if(!email.value){
+                            email.value = '请输入邮箱';
+                            console.log('123');
+                            return  ;
+                        }
+                    }
+                },
+                directives:{
+                    myfocus:{
+                        inserted:function(myel){
+                            myel.style.backgroundColor = '#fd2';
+                        }
+                    }
+                }
+            }
+        },
+        created:function(){
+            console.log(1);
+            this.mydata = '祝各位新年快乐！';
+            console.log(this.$data);
+        },
+        updated:function(){
+            console.log('数据调试中...');
+        },
+        mounted:function(){
+            console.log(this.$el);
+        },
+        mixins:[appwarn]
+    });
+
+
+</script>
+</body>
+</html>

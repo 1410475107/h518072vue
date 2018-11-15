@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-03-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-bind可以绑定属性值；v-model指令实现双向绑定</h3>
+    <ol>
+        <li>v-bind和v-model一起实现动态props；</li>
+        <li>props是单向的，父组件会影响子组件，但是子组件在改变属性值时对父组件没有影响；</li>
+    </ol>
+    <input type="text" name="" id="" v-model="years"> <br>
+    <input type="text" name="" id="" v-model="companys"><br>
+    <input type="text" name="" id="" v-model.lazy="reg"><br>
+
+    <!-- 注意加不加冒号(:)，也就是v-bind的区别 -->
+    <my-tag-here :dateyears="years" :company="companys" :reg-number='reg'></my-tag-here>
+</div>
+<script>
+    //注册个全局组件
+    Vue.component('my-tag-here',{
+        props:['dateyears', 'company', 'regNumber'],
+        template:'<div>版权所有@{{dateyears}}-{{company}}-{{regNumber}}</div>'
+    });
+    //创建vue实例
+    let v2 = new Vue({
+        el:'.container',
+        data:{
+            years:'2018',
+            companys:'四小组',
+            reg:'川公网安备 51010402056051号 '
+        }
+    });
+</script>
+</body>
+</html>

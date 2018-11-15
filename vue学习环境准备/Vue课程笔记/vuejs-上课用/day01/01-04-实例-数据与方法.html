@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-04-实例</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>vue数据是响应式的；</h3>
+    <ol>
+        <li>
+            当创建一个Vue实例时，<code>data</code>对象中所有的属性都会加入Vue的<code>响应式系统</code>中； <br>
+            当这些属性值发生改变时，视图页面会立即给出响应，而这些事情都是Vue自动完成的，开发者不需要进行DOM的相关数据更新操作；
+        </li>
+        <li>Vue实例的数据属性和data对象中的属性是同一个引用；</li>
+        <li>Vue实例除了数据属性，还暴露有其它属性或方法可用：https://cn.vuejs.org/v2/api/#vm-data，他们都是以$开头的；</li>
+        <li>扩展：Object.freeze()：禁止修改现有属性的值，并禁止添加新属性；</li>
+    </ol>
+    <div class="mydiv">{{showme}}</div>
+    <div id="s">姓名：{{name}}，年龄：{{age}}，身高：{{height}}</div>
+    <div class="t">上课老师：{{name}}</div>
+</div>
+<script>
+    //响应式系统
+    let myvue = new Vue({
+        el:'.mydiv',
+        data:{
+            showme:'见证奇迹的时刻到了'
+        }
+    });
+
+    //再来个小栗子
+    //提前定义好一个数据
+    const objdata   = {name:'苟洁', age:20, height:170};
+
+    //创建一个Vue实例
+    let   vue1      = new Vue({
+        el:'#s',
+        data:objdata
+    });
+
+    //在数据上他们引用同一个对象：objdata.age 和 vue1.age 是一个
+    console.log(objdata.age === vue1.age);
+
+    //控制台修改数据可以看到，页面是立即响应的
+    //
+    //暴露的更多属性
+    console.log(vue1.$data);
+    console.log(vue1.$el);
+    
+    //禁止修改数据的属性值
+    const   selfdata    = {name:'鲁老师'};
+    Object.freeze(selfdata);
+    let     vue2        = new Vue({
+        el:'.t',
+        data:selfdata
+    });
+
+</script>
+</body>
+</html>

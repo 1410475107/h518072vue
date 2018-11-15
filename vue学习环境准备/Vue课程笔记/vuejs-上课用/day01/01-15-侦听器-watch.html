@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-15-侦听器</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>当需要在数据变化时执行异步或开销较大的操作时，最好使用侦听器 watch；</h3>
+    <div id="watch-example">
+        <p>
+            随便输入个问题:
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script>
+var watchExampleVM = new Vue({
+    el: '#watch-example',
+    data: {
+        question: '',
+        answer: '请提问!'
+    },
+    watch: {
+        // 如果 `question` 发生改变，这个函数就会运行
+        question: function (newQuestion, oldQuestion) {
+            this.answer = '等待你完成问题输入...'
+            this.getAnswer()
+        }
+    },
+    methods: {
+        // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+        // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+        // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+        // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+        // 请参考：https://lodash.com/docs#debounce
+        getAnswer: _.debounce(
+            function () {
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = '请输入?作为问题结束标记...';
+                    return ;
+                }
+                this.answer = '思考中...';
+                var vm      = this;
+                axios.get('https://yesno.wtf/api')
+                    .then(function (response) {
+                        vm.answer   = _.capitalize(response.data.answer)
+                    })
+                    .catch(function (error) {
+                        vm.answer = '接口连接错误 ' + error
+                    });
+            },
+            // 这是我们为判定用户停止输入等待的毫秒数
+            500
+        )
+    }
+});
+</script>
+</body>
+</html>

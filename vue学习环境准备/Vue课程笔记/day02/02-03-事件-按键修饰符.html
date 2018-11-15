@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-03-事件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .newclass{
+            background-color: #f2d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+       <h3>事件修饰符</h3>
+       <button class="myclass" id="my" myattr='12306' :myattr="mydefine" :id="newid" :class="{newclass:isuse, addclas:isuse1}" @keydown.enter="cc">键盘修饰符的使用</button>
+    </div>
+    <script>
+        let v = new Vue({
+            el:'#app',
+            data:{
+                isuse:false,
+                isuse1:true,
+                newid:'myid',
+                mydefine:'1236'
+            },
+            methods:{
+                cc(){
+                    this.isuse = !this.isuse;
+                }
+            }
+        }); 
+    </script>
+</body>
+</html>

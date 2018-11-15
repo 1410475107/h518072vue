@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-08-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>vue数据绑定支持表达式</h3>
+    <ol>
+        <li>只能是单个表达式；语句是不支持的，比如变量声明语句、流程控制语句等；</li>
+        <li>不能访问用户定义的全局变量；</li>
+    </ol>
+
+    <!-- 简单的表达式 -->
+    <div class="mydiv">计算结果：{{Math.random()*n+10}}</div>
+    <!-- 三元表达式 -->
+    <div class="weath">今天天气{{good ? '很好':'有点糟糕'}}</div>
+    <!-- 各种内置函数的使用 -->
+    <div class="str">{{message.split('').reverse().join('')}}</div>
+</div>
+<script>
+    //双大括号里面使用表达式
+    let v1 = new Vue({
+        el:'.mydiv',
+        data:{
+            n:20
+        }
+    });
+
+    //三元表达式
+    let v2 = new Vue({
+        el:'.weath',
+        data:{
+            good: true
+        }
+    });
+
+    //各种内置函数的使用
+    let v3 = new Vue({
+        el:'.str',
+        data:{
+            message:'如果有时间，我们应该去旅行'
+        }
+    });
+</script>
+</body>
+</html>

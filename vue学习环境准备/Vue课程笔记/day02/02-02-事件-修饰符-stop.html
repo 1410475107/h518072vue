@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-02-事件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>事件修饰符</h3>
+        <ol>
+            <li>stop事件修饰符：阻止事件继续传播</li>
+            <li>多个修饰符可以串联起来使用，注意顺序;</li>
+        </ol>
+       
+        <div class="myclass" @click="changeff('blue', $event)">
+            点击父级盒子修改成蓝色
+            <p @click="changecolor('red', $event)">点击修改背景颜色：红色</p>
+        </div>
+        <div @click.right.prevent="ctext">点击右键修改内容</div>
+    </div>
+    <script>
+        let v = new Vue({
+            el:'#app',
+            data:{
+                loginmodel:'e',
+                tel:'159'
+            },
+            methods:{
+                changecolor(color, e){
+                    e.target.style.backgroundColor = color;
+                    // e.stopPropagation();
+                    if(e.target.tagName == 'P'){
+                        e.target.parentNode.style.backgroundColor = color;
+                    }
+                    alert(123);
+                },
+                changeff(color, e){
+                    e.target.style.fontFamily = '楷体';
+                },
+                ctext(e){
+                    e.target.innerHTML = '点击后的内容';
+                }
+
+            }
+        }); 
+
+    </script>
+</body>
+</html>

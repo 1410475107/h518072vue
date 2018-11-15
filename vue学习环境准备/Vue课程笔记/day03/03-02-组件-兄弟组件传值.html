@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-02-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>兄弟组件之间传值</h3>
+           <ol>
+                <li>可以使用一个空的 Vue 实例作为事件总线；</li>
+                <li>$on(eventName) 监听事件；</li>
+                <li>事件的触发和监听要在一个实例之上；</li>
+           </ol>
+            <first-com></first-com>
+            <second-com></second-com>
+            <third-com></third-com>
+        </div>
+        <script>
+        let myVue = new Vue();
+        //提供一个中间键：就是Vue实例
+        let first = {
+            template:'<div class="myclass" @click="myevent">我是第一个组件：first</div>',
+            data:function () {
+                return {
+                    mydata:'first_com'
+                };
+            },
+            methods:{
+                myevent(){
+                    console.log(1);
+                    myVue.$emit('first-event', this.mydata);
+                }
+            }
+        };
+
+        let second = {
+            template:'<div class="myclass" @click="myevent">我是第二个组件：{{secondData}}</div>',
+            data:function () {
+                return {
+                    mydata:'second_com',
+                    secondData:'第二个'
+                };
+            },
+            methods:{
+                myevent(){
+                    console.log(2);
+                    myVue.$emit('second-event', this.mydata);
+                }
+            }
+        };
+
+        let third = {
+            template:'<div>我是第三个组件：{{firstData}}，{{secondData}}</div>',
+            data:function () {
+                return {
+                    firstData:'第一个组件传的值',
+                    secondData:'第二个组件传的值'
+                };
+            },
+            methods:{
+                data:'123'
+            },
+            mounted:function () {
+                //注意this的指向问题
+                let This = this;
+                //$on用于监听事件
+                myVue.$on('first-event', function (a) {
+                    console.log('3-1');
+                    this.firstData = a;
+                }.bind(this));
+                myVue.$on('second-event', function (a) {
+                    console.log('3-2');
+                    console.log(a);
+                    this.secondData = a;
+                }.bind(this));
+            }
+        };
+
+        let v = new Vue({
+            el:'.container',
+            data:{},
+            components:{
+                'first-com':first,
+                'second-com':second,
+                'third-com':third
+            },
+            methods:{
+                myefn(a){
+                    console.log(a);
+                    console.log('触发自定义事件：父组件');
+                }
+            }
+        });
+        </script>
+    </body>
+</html>

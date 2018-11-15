@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-08-Babel</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>Babel</h3>
+    <ol>
+        <li>
+        	Babel是一个将ES6或者其他类型的js语言转换成浏览器能支持的ES5的工具。
+			这样我们就可以在编程时使用新特性，打包时再进行转换。
+			<pre>
+				安装：
+					npm install --save babel-loader babel-core
+					npm install babel-loader @babel/core @babel/preset-env
+                                        npm install --save-dev babel-preset-es2015
+				配置：
+				module:{
+				    rules:[
+				        {
+			                test: /\.js$/,
+			                loader: 'babel-loader',
+			                exclude: "/node_modules/",
+			                query: {
+			                    presets: ['es2015']
+			                }
+			            }
+				    ]
+				}
+			</pre>
+        </li>
+    </ol>
+</div>
+<script>
+</script>
+</body>
+</html>

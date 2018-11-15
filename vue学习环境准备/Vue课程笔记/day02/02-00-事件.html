@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-00-事件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>事件的一些相关概念</h3>
+        <ol>
+            <li>事件是用v-on绑定，简写@；</li>
+            <li>开放出来一个变量，$event，代表当前事件对象；</li>
+            <li>事件里面是支持事件对象的，可以直接使用原生态的事件对象；</li>
+            <li>事件方法定义在methods对象里面；</li>
+            <li>methods里面的方法外部可以通过Vue实例对象直接调用；</li>
+        </ol>
+        <h3>登录</h3>
+        <div v-if="loginmodel == 'e'">邮箱：<input type="text" name="email" key="email"></div>
+        <div v-if="loginmodel == 't'">手机号：<input type="text" name="tel" key="tel"></div>
+    
+        <button @click="login1('e')">邮箱</button>
+        <button @click="login1('t')">手机号</button>
+    </div>
+    <script>
+        let v = new Vue({
+            el:'#app',
+            data:{
+                loginmodel:'e'
+            },
+            methods:{
+                login1: function(a) {
+                    this.loginmodel = a;
+                },
+                fn:function () {
+                    console.log('直接调用内部方法');
+                }
+            }
+        }); 
+        //外部直接使用内部方法
+        v.login1('t');
+        v.fn();
+
+    </script>
+</body>
+</html>

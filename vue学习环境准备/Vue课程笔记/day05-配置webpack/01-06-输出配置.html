@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-06-输出配置</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>输出配置</h3>
+    <ol>
+        <li>
+        	publicPath：
+        	<pre>
+        		如果项目上线时，打包的js文件要单独放在另外的服务器中，我们可以使用该属性设置路径的域名。如：
+				publicPath: "http://cdn.com/“
+				生成的html文件中的引用路径就是：
+				http://cdn.com/dist/js/bundle.js
+
+				例如：
+				output:{
+					path:__dirname + '/dist/',
+					filename:"[name].js",
+					publicPath: "http://cdn.com/"
+				}
+        	</pre>
+
+        </li>
+    </ol>
+</div>
+<script>
+    
+</script>
+</body>
+</html>

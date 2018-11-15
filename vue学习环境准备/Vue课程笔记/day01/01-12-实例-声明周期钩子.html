@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-12-实例</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>生命周期钩子的函数</h3>
+    <ol>
+        <li>
+            在创建Vue实例时，会经过一系列的初始化过程，比如数据监听、模板编译、数据挂载及数据变化时更新DOM内容等，在这个过程中就有了<code>声明周期钩子</code>函数，在不同的步骤分别执行；<br>
+            比如created会在实例创建完成后执行；
+        </li>
+        <li>
+            有了这些函数，我们就可以在不同阶段添加自己的代码；钩子函数不要使用箭头函数，不然this指向问题将困扰着你；
+        </li>
+        <li>
+            什么时候可以调用什么钩子函数？？参考下图即可 <br>
+            <img src="./img/lifecycle.png" alt="" width="800">
+        </li>
+    </ol>
+    <div id="s">姓名：{{name}}，年龄：{{age}}，身高：{{height}}</div>
+</div>
+<script>
+    //提前定义好一个数据
+    const objdata   = {name:'苟洁', age:20, height:170};
+    //创建一个Vue实例
+    let   vue1      = new Vue({
+        el:'#s',
+        data:objdata,
+        created:function () {
+            console.log(this);
+            console.log(this.$el); //undefined
+        },
+        mounted:function () {
+            console.log(this.$el); //这个时候正常打印
+        },
+        beforeCreate:()=>console.log('不使用this')
+    });
+
+</script>
+</body>
+</html>

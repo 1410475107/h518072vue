@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-18-样式操作</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>支持数组语法；</h3>
+    <ol>
+        <li>可以给 v-bind:class传递一个数组类型的数据，实现 class 列表；</li>
+        <li>
+            根据条件切换列表中的 class，可以用三元表达式或者数组中嵌套对象；
+            很明显嵌套对象比三元表达式简介的多；
+        </li>
+    </ol>
+    <div class="mydiv" v-bind:class="[isuse, iswhite, isadd ? 'addclass' :'', {addover:isover}]">是否启用myclass；</div>
+</div>
+<script>
+    //简单的字符串直接修改class或style的值
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+            isuse:'myclass', //mydiv myclass
+            iswhite:'color', //mydiv myclass color
+            isadd:true,      //mydiv myclass color addclass
+            isover:true      //mydiv myclass color addclass addover
+        }
+    });
+</script>
+</body>
+</html>

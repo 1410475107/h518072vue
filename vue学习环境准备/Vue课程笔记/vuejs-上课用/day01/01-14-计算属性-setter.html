@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-14-计算属性</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>计算属性默认只有getter，我们可以显示的添加setter；</h3>
+    <!--桌子数量 绑定变量tableCount，并且输入数量时触发update -->
+    <label>
+      桌子数量： <input type="text" @input = "update" :value="tableCount">
+    </label>
+    <!--统计结果 -->
+    <output>
+      我们要做{{legsCount}}桌腿，组成 {{tableCount}} 张桌子
+    </output>
+</div>
+<script>
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+            legsCount:12
+        },
+        computed:{
+            tableCount:{
+                get() {
+                    return this.legsCount/4;            
+                },
+                set(v) {
+                    this.legsCount = 4*v;
+                }
+            }
+        },
+        //组件
+        methods:{
+            //输入框的值有变化时执行
+            update:function (e) {
+                this.tableCount = e.target.value;
+            }
+        }
+    });
+</script>
+</body>
+</html>

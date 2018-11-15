@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-07-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>通过事件的.vative修饰符给组件绑定事件</h3>
+    对第{{shownum}}版块进行相关操作
+    <!-- 给组件绑定事件 -->
+    <my-event-tag @myevent="showban" @click.native="clickfn" show="1"></my-event-tag>
+</div>
+<script>
+    Vue.component('my-event-tag', {
+        template:'<ul @click="showmenu">\
+                    <li s="1">栏目1</li>\
+                    <li s="2">栏目2</li>\
+                    <li s="3">栏目3</li>\
+                </ul> ',
+        data:function(){
+            return {
+                num:1
+            }
+        },
+        methods:{
+            showmenu:function(e){
+                this.num = e.target.getAttribute('s');
+                //出发事件，支持传参
+                this.$emit('myevent', this.num);
+                console.log(this.num);
+            }
+        }
+    });
+
+    //创建Vue实体对象
+    let v1 = new Vue({
+        el:'.container',
+        data:{
+            shownum:1
+        },
+        methods:{
+            showban:function(n){
+                console.log(n);
+                this.shownum = n;
+            },
+            clickfn:function(){
+                alert(12);
+            }
+        }
+    });
+</script>
+</body>
+</html>

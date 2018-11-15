@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-02-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>组件之间的数据是孤立的，他们都有各自的作用域</h3>
+    <ol>
+        <li>父组件的数据通过prop下发给子组件；</li>
+        <li>子组件需要使用props显示的声明他要接收的数据；</li>
+        <li>遇到驼峰命名的，需要用分割线-分割一下；</li>
+    </ol>
+    <my-tag-here dateyears="2018" :company="companys" reg-number='川A201962'></my-tag-here>
+</div>
+<script>
+    //注册个全局组件
+    Vue.component('my-tag-here',{
+        props:['dateyears', 'company', 'regNumber'],
+        template:'<div>版权所有@{{dateyears}}-{{company}}-{{regNumber}}</div>'
+    });
+    //创建vue实例
+    let v2 = new Vue({
+        el:'.container',
+        data:{
+            companys:'四小组'
+        }
+    });
+</script>
+</body>
+</html>

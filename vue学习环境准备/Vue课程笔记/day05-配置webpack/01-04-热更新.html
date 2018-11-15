@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-04-webpack-热更新</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>热更新</h3>
+    <ol>
+        <li>
+        	<pre>
+	        	module.exports = {
+				    entry: __dirname + "/src/main.js",
+				    output: {
+					path: __dirname + "/dist/js",
+					filename: "bundle.js"
+				    },
+				    module: {
+				        rules: [{  //处理每一种文件都可以在rules数组中添加一个对象
+				            test: /\.css$/,   //用正则表达式匹配css文件
+				            use: [‘style-loader’, ‘css-loader’, ‘postcss-loader’]  //指定使用的加载器
+				        }]
+				    },
+				    //热更新配置
+				    devServer:{
+						contentBase:__dirname + '/dist/',
+						host:'localhost',
+						compress:true,
+						port:8081 
+					}
+				}
+			</pre>
+			安装服务：
+			<pre>
+				cnpm install webpack-dev-server --save-dev
+			</pre>
+			package.json配置：
+			<pre>
+				"scripts": {
+				    "dev": "webpack-dev-server --inline --progress --config webpack.config.js",
+				    "start": "npm run dev"
+				 }
+			</pre>
+        </li>
+    </ol>
+</div>
+<script>
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-13-事件处理</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-on在监听键盘事件时支持按键修饰符，通过检查键值来执行函数</h3>
+    <ol>
+        <li>支持键值直接修饰；</li>
+        <li>
+            键值并不好记，也存在兼容性问题，别名很好的解决了这个问题：
+            <pre>
+                    .enter
+                    .tab
+                    .delete (对应“删除”和“退格”两个键)
+                    .esc
+                    .space
+                    .up
+                    .down
+                    .left
+                    .right
+            </pre>
+        </li>
+        <li>
+            可以通过全局 config.keyCodes 对象自定义按键修饰符别名：
+            <pre>
+                // 可以使用 `v-on:keyup.f1`
+                Vue.config.keyCodes.f1 = 112
+            </pre>
+        </li>
+    </ol>
+    <h3>新增鼠标按键修饰符</h3>
+    <ol>
+        <li>.left</li>
+        <li>.right</li>
+        <li>.middle</li>
+    </ol>
+    <!-- cbg是下面定义的方法名 -->
+    <input type="button" class="myclass" :class="{plist:isUse}" @keyup.13="cbg" value="键盘事件">
+
+    <input type="button" class="myclass run" :style="rundown" @keydown.down="run" value="向下跑">
+
+    <!-- 鼠标按键修饰符和事件修饰符联合使用 -->
+    <button @click.prevent.right="showme">点击右键才有效</button>
+</div>
+<script>
+    //点击事件结合样式操作，实现样式切换
+    let v = new Vue({
+        el:'.container',
+        data:{
+            isUse:0,
+            bgc1:{backgroundColor:'#d2f'},
+            bgc2:{backgroundColor:'#d2f'},
+            top:100,
+            rundown:{top:'100px'}
+        },
+        methods:{
+            cbg:function (e) {
+                this.isUse = !this.isUse;
+                console.log(e.target);
+                console.log(e.target.innerHTML);
+            },
+            run:function (e) {
+                this.top += 10;
+                this.rundown = {top:this.top + 'px'};
+            },
+            showme:function (e) {
+                e.target.innerHTML = '你点了右键';
+            }
+        }
+    });
+</script>
+</body>
+</html>

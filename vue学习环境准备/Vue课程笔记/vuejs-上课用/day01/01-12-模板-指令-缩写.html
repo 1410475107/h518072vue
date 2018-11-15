@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-12-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>v-前缀只是一种视觉提示，用来识别模板中Vue特定的特性；</h3>
+    <ol>
+        <li>
+            Vue.js 为 v-bind 和 v-on 这两个最常用的指令提供了简写： <br>
+            <code>v-bind:</code>==><code>:</code>  <br>
+            <code>v-on:</code>==><code>@</code>
+
+        </li>
+    </ol>
+
+    <!-- 使用v-bind简写指令绑定属性的值为表达式 -->
+    <a href="http://baidu.com" class="href" d:href="mylink" v-bind:target="target">链接地址</a>
+
+    <!-- 来个事件简写试试 -->
+    <div class="nowtime" @click="getnowtime">当前时间：{{nowtime}}</div>
+
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        //定义数据
+        data:{
+            mylink:'http://www.hqyj.com',
+            target:'_blank',
+            nowtime:new Date().toLocaleString()
+        },
+        //定义方法
+        methods:{
+            getnowtime () {
+                this.nowtime = new Date().toLocaleString();
+            }
+        }
+    });
+</script>
+</body>
+</html>

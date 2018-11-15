@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-18-事件处理</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>修饰符</h3>
+    <ol>
+        <li>lazy：对应事件是change；</li>
+        <li>number：将用户输入的值转换成数字类型，前提是数据确实可以转换成数字；</li>
+        <li>trim：过滤首尾空白字符；</li>
+    </ol>
+    <div>
+        账号：<input type="text" class="form-control" value="user" v-model.lazy="message" name="username">
+        <span>你已经输入了{{message.length}}个字符</span>
+    </div>
+    <hr>
+    <div>
+        年龄：<input type="text" class="form-control" v-model.number = "age" >
+        <span>你的年龄是：{{age}} {{typeof age}}</span>
+    </div>
+    <hr>
+    <div>
+        住址：<input type="text" class="form-control" v-model.trim = "add" >
+        <span>我的住址：{{add}}</span>
+    </div>
+</div>
+<script>
+   let v1 = new Vue({
+        el:'.container',
+        data:{
+           message:'user',
+           age:22,
+           add:''
+        }
+    });
+</script>
+</body>
+</html>

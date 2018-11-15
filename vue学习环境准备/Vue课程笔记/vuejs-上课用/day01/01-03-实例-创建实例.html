@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-03-实例</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>Vue是window上的一个属性，也就是一个全局变量，他的值是构造函数 Vue$3；</h3>
+    <ol>
+        <li>
+            所以很显然的，我们创建一个Vue实例是这样来的：
+            <pre>
+                var vm = new Vue({});
+                传递的实参是对象;
+            </pre>
+            vm是实例对象，名称当然是随便取的；  <br>
+            这里用vm表示的意思是ViewModel，虽然Vue没有完全遵守MVVM模式，但是确实有MVVM思想的影子；
+        </li>
+    </ol>
+</div>
+<script>
+    let myvue = new Vue({});
+    console.log(myvue);
+</script>
+</body>
+</html>

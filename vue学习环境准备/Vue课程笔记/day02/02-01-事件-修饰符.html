@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-01-事件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <h3>事件修饰符</h3>
+        <ol>
+            <li>使用点(.)添加修饰符</li>
+        </ol>
+        <h3>登录</h3>
+        <div v-if="loginmodel == 'e'">邮箱：<input type="text" name="email" key="email"></div>
+        <div v-if="loginmodel == 't'">手机号：<input type="text" @input.once = "changetel" name="tel" key="tel"></div>
+        手机号：{{tel}}  
+
+        <br>
+        <button @click="login1('e')">邮箱</button>
+        <button @click="login1('t')">手机号</button>
+    </div>
+    <script>
+        let v = new Vue({
+            el:'#app',
+            data:{
+                loginmodel:'e',
+                tel:'159'
+            },
+            methods:{
+                login1: function(a) {
+                    this.loginmodel = a;
+                },
+                fn:function () {
+                    console.log('直接调用内部方法');
+                },
+                changetel:function (e) {
+                    this.tel = e.target.value;
+                }
+            }
+        }); 
+        //外部直接使用内部方法
+        v.login1('t');
+        v.fn();
+
+    </script>
+</body>
+</html>

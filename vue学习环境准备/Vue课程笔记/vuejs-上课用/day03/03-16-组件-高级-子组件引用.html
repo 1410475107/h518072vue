@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-16-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>引用子组件的属性和方法</h3>
+    <ol>
+        <li>通过ref为子组件设置引用ID属性；</li>
+        <li>通过Vue实例公开的$ref对象结合子组件设置的引用ID，就可以找到子组件实例；然后我们就可以使用子组件实例里面的属性或方法；</li>
+        <li>$refs是在组件渲染完成后才填充，是非响应式的</li>
+    </ol>
+    <login ref="mylogin"></login>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            whitch_com_used:'login'
+        },
+        methods:{
+            showme(){
+                console.log(this.$children);
+            }
+        },
+        components:{
+            'login':{
+                template:`
+                    <form>
+                    <h3>登录</h3>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">登录</button>
+                </form>`,
+                data:function(){
+                    return {mydogname:'谢谢'};
+                },
+                methods:{
+                    checkdata:function(){
+                        let email  =document.querySelector('#exampleInputEmail1');
+                        if(!email.value){
+                            email.value = '请输入邮箱';
+                            console.log('123');
+                            return  ;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    window.onload = function(){
+        console.log(v);
+        //获取子组件实例
+        var login = v.$refs.mylogin;
+        //打印子组件实例
+        console.log(login); 
+        //使用子组件里面的属性或方法
+        login.checkdata();
+        console.log(login.$data.mydogname);
+        console.log(login.mydogname);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-03-00-组件</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            margin: 10px;
+            height: 50px;
+            background-color: #2df;
+        }
+        .plist{
+            width: 240px;
+            height: 240px;
+            float: left;
+            margin: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #dd1;
+            word-break: break-all;
+        }
+        .run{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>组件是vue强大的功能之一，英文单词：component</h3>
+    <ol>
+        <li>组件可以扩展 HTML 元素，封装可重用的代码；</li>
+        <li>所有的 Vue 组件都是 Vue 的实例，所以可接受相同的选项对象，并提供相同的生命周期钩子；</li>
+    </ol>
+
+    <h3>注册全局组件</h3>
+    <ol>
+        <li>
+            全局组件注册语法：
+                <pre>
+                    Vue.component(tagName, options);
+                </pre>
+                如：
+                <pre>
+                Vue.component('my-component', {
+                    // 选项
+                })
+                </pre>
+                标签的名称推荐是小写，多个单词之间用-分开；当然这不是强制的； <br>
+                component后面没有s；
+        </li>
+        <li>全局组件要在实例化Vue根实例之前注册组件；</li>
+    </ol>
+    <h3>组件局部注册</h3>
+    <ol>
+        <li>可以通过某个 Vue 实例/组件的实例选项 components 注册仅在其作用域中可用的组件；</li>
+        <li>
+            局部组件注册语法：
+            <pre>
+                new Vue({
+                    // ...
+                    components: {
+                        tagName:options
+                    }
+                });
+            </pre>
+            <code>注意：components后面没有s</code>
+        </li>
+    </ol>
+    <!-- 自定义全局组件 -->
+    <div class="myclass">
+        <my-tag-here></my-tag-here>
+        <my-child-tpl></my-child-tpl>
+    </div>
+    <my-tag-here></my-tag-here>
+    <!-- 这里使用局部的组件会报错 Unknown custom element: <my-child-tpl> - did you register...?-->
+    <my-child-tpl></my-child-tpl>
+    
+    <!-- 可以使用is指定使用的自定义组件 -->
+    <ul>
+        <li is='my-li'></li>
+    </ul>
+    <table>
+        <my-row></my-myrow>
+    </table>
+</div>
+<script>
+    //注册个全局组件
+    Vue.component('my-tag-here',{
+        template:'<div>自定义插件，请知晓~~</div>'
+    });
+    //全局组件，Vue实例均可使用
+    let v1 = new Vue({
+        el:'.myclass',
+        //定义局部组件，定义在了myclass下，外面不能用
+        components:{
+            'my-child-tpl':{
+                template:'<div>这里是个局部组件。。。</div>'
+            }
+        }
+    });
+
+    let v2 = new Vue({
+        el:'.container',
+        components:{
+            'my-child-tpl':{
+                template:'<div>这里是container的局部组件。。。</div>'
+            },
+            'my-li':{
+                template:'<li>列表1</li>'
+            },
+            'my-row':{
+                template:'<tr><td>OK</td></tr>'
+            }
+        }
+    });
+</script>
+</body>
+</html>

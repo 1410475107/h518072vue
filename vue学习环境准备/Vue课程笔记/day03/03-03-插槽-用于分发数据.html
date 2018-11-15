@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>vue-03-03-组件</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../vue.js"></script>
+         <style>
+            .myclass{
+                cursor: pointer;
+                border: 1px solid #ddd;
+                background-color: #2fd;
+                padding: 10px;
+            }
+            .myclass p{
+                border: 1px solid #ddd;
+                margin: 20px;
+                background-color: #df2;
+            }
+            .color{
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+           <h3>插槽：slot</h3>
+           <ol>
+                <li>实现数据分发；</li>
+           </ol>
+           <my-header>
+               <ul>
+                   <li>
+                       <a href="#">我的订单</a>
+                   </li>
+                   <li>
+                       <a href="#">个人设置</a>
+                   </li>
+                   <li>
+                       <a href="#">注销</a>
+                   </li>
+               </ul>
+           </my-header>
+        </div>
+        <script>
+            Vue.component('my-header', {
+                template:`  <div><slot>
+                                <ul>
+                                <li>菜单1</li>
+                                <li>菜单2</li>
+                                <li>菜单3</li>
+                                </ul>
+                            </slot>
+                            </div>`,
+                data:function () {
+                    return  {}; 
+                }
+            });
+
+            let v = new Vue({
+                el:'.container',
+                data:{},
+                methods:{
+                }
+            });
+        </script>
+    </body>
+</html>

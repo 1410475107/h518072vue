@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-02-基础-需要知道的一些术语</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        img{
+            border:2px solid #c11;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>MVC开发模式；</h3>
+    <ol>
+        <li>
+            MVC：MVC告诉我们软件开发时可以分成三个部分同时进行； <br>
+            <img src="./img/mvc.jpg" alt="">   <br>
+            分别表示：
+            <pre>
+                M：Model，模型，数据；
+                V：View，视图，用户界面；
+                C：Controller，控制器，业务逻辑控制；
+            </pre>
+            <hr>
+            他们之间的通信方式如下： <br>
+            <img src="./img/mvci.jpg" alt="">
+            <pre>
+                一，View发送指令给Controller；
+                二，Controller完成业务逻辑后，要求Model对数据进行不同的处理；
+                三，Model将新的数据发送到View，view负责以友好的方式把数据展示给用户；
+            </pre>
+            他们之间的通信是单向的，这是一个比较理想的状态，在实际项目中往往会采用更灵活的模式；
+            <hr>
+            更好的理解什么是MVC： <br>
+            <img src="./img/mvc1.jpg" alt="">
+        </li>
+        <li>
+            MVP：把MVC中的Controller替换成Presenter；Presenter：主持人； <br>
+            <img src="./img/mvp.jpg" alt="">  <br>
+            <pre>
+                一，各部分之间的通信是双向的；
+                二，V与M之间不发生联系，通过Presenter传递；
+                三，View非常轻，不部署任何业务逻辑，属于被动视图，即没有任何主动性，而 Presenter非常重，所有逻辑都部署在Presenter里面；
+            </pre>
+        </li>
+        <li>
+            MVVM：Model-View-ViewModel，本质上是MVC进化而来，是MVC的升级版； <br>
+            其中ViewModel将视图和业务逻辑完全分开，  <br>
+            他负责取出Model的数据的同时把数据按照指定的业务逻辑展示在View视图上；
+        </li>
+    </ol>
+</div>
+<script>
+</script>
+</body>
+</html>

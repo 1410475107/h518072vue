@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-02-07-循环列表</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .myclass{
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #2fd;
+            padding: 10px;
+        }
+        .myclass p{
+            border: 1px solid #ddd;
+            margin: 20px;
+            background-color: #df2;
+        }
+
+        .color{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>结合计算属性和方法，我们可以对数据进行处理后再循环</h3>
+    <h3>产品销量列表</h3>
+    <ul v-if="showall === 'yes'">
+        <li v-for="(p, i) in products">{{i+1}}，{{p.name}}，{{p.nums}}</li>
+    </ul>
+    <ul v-if="showall !== 'yes'">
+        <li v-for="(p, i) in goodlist">{{i+1}}，{{p.name}}，{{p.nums}}</li>
+    </ul>
+    <form class="form-inline">
+        销量超过<input class="form-control" type="number" size="2" value="0" @input = "goodProducts">的共有{{pnum}}个产品，总销量{{selltotal}}
+    </form>
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        data:{
+            showall:'yes',
+            pnum:5,
+            selltotal:264,
+            goodlist:[],
+            products:[
+                {id:1, name:'ins超火内增高运动鞋女韩版ulzzang原宿百搭2018春季新款休闲女鞋', nums:10},
+                {id:2, name:'正品低帮帆布鞋女鞋GD同款vansιicea万斯利亚经典款男鞋滑板鞋潮', nums:38},
+                {id:3, name:'大喜自制2017秋冬新款纯色百搭头层猪皮方跟麂皮绒过膝长靴女鞋子', nums:46},
+                {id:4, name:'岛上定制切尔西短靴春秋低跟英伦单靴真皮靴子圆头女鞋擦色裸靴冬', nums:61},
+                {id:5, name:'小白鞋2018新款百搭韩版德康万斯1992板鞋春季超火 ins帆布鞋女鞋', nums:109}
+            ]
+        },
+            // computed:{
+            //     getpnum:{
+            //         get:function (t) {
+            //             return this.products.length;
+            //         },
+            //         set:function (num) {
+            //             this.listn = num;
+            //         }
+            //     },
+            //     getselltotal:{
+            //         get:function () {
+            //             return this.products.reduce((a, b)=>{return {nums:a.nums + b.nums}}).nums;
+            //         },
+            //         set:function (num) {
+            //             this.selltotal = num;
+            //         }
+            //     },
+            //     goodProducts:function (e) {
+            //         let showplist = this.products.filter(function(p) {
+            //             return p.nums > e.target.value;
+            //         });
+            //         //重新计算产品数量和总销量
+            //         console.log(showplist.length);
+            //         this.getpnum = showplist.length;
+            //         return showplist;        
+            //     }
+            // },
+        methods:{
+            goodProducts:function (e) {
+                this.showall = 'no';
+                let showplist = this.products.filter(function(p) {
+                    return p.nums > e.target.value;
+                });
+                //重新计算产品数量和总销量
+                console.log(showplist.length);
+                this.pnum        = showplist.length;
+                this.selltotal   = showplist.length ? showplist.reduce((a, b)=>{return {nums:a.nums + b.nums}}).nums : 0;
+                this.goodlist       = showplist;
+            }
+        }
+    });
+</script>
+</body>
+</html>

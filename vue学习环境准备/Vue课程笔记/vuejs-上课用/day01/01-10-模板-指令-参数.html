@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-01-10-模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../vue.js"></script>
+    <style>
+        .nowtime{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>有些指令支持参数：指令:参数</h3>
+    <ol>
+        <li>响应式的修改HTML属性的v-bind指令支持参数：v-bind:attribute；</li>
+        <li>v-on实现监听DOM事件一样的需要参数，也就是事件名：v-on:event="fn"；</li>
+    </ol>
+    <!-- 使用v-bind指令绑定属性的值为表达式 -->
+    <a href="http://baidu.com" class="href" v-bind:href="mylink" v-bind:target="target">链接地址</a>
+
+    <!-- 来个事件试试 -->
+    <div class="nowtime" v-on:click="getnowtime">当前时间：{{nowtime}}</div>
+
+</div>
+<script>
+    let v = new Vue({
+        el:'.container',
+        //定义数据
+        data:{
+            mylink:'http://www.hqyj.com',
+            target:'_blank',
+            nowtime:new Date().toLocaleString()
+        },
+        //定义方法
+        methods:{
+            getnowtime () {
+                this.nowtime = new Date().toLocaleString();
+            }
+        }
+    });
+</script>
+</body>
+</html>
