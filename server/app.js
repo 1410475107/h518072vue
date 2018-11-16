@@ -53,9 +53,16 @@ app.get('/getkw', (req, res) => {
     connection.query(sql, (err, results)=>{
         res.json(results);
     });
-    
+});
 
-    
+
+app.get('/getbooks', (req, res) => {
+    //接收get过来的值
+    let page = req.query.page;
+    let sql = `SELECT * FROM book WHERE 1 LIMIT 50`;
+    connection.query(sql, (err, results)=>{
+        res.json(results);
+    });
 });
 
 app.listen(81);

@@ -10,16 +10,17 @@
 
 <body>
     <div id="app">
-            <book-info 
-            v-for="book in booklist"
-            :key="book.bid"
-            :bimg="book.bimg" 
-            :btitle="book.btitle"
-            :authors="book.authors"
-            ></book-info>
-
-            
+        <div>我的盒子1</div>
+        <my-center></my-center>
+        <my-tag></my-tag>
     </div>
+    <hr>
+    <div id="app1">
+        <div>我的盒子2</div>
+        <my-center></my-center>
+        <my-tag></my-tag>
+    </div>
+
     
 </body>
 </html>

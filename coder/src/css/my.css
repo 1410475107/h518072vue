@@ -23,3 +23,12 @@
 .success{
     color: green;
 }
+.authors{
+    color: blueviolet;
+}
+.binfo{
+    display: inline-block;
+}
+.binfo:hover{
+ background-color: rgb(136, 57, 57);
+}

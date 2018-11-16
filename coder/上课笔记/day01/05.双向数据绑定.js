@@ -5,7 +5,7 @@ import Axios from 'axios';
 let vm = new Vue({
     el: '#app',
     data: {
-        formdata:{
+        myform:{
             username: '',
             passwd: ''
         },
@@ -15,7 +15,7 @@ let vm = new Vue({
     methods: {
         Login() {
             let _this =this;
-            Axios.post('http://localhost:81/login', _this.formdata)
+            Axios.post('http://localhost:81/login', _this.myform)
                 .then(function (response) {
                     console.log(response.data);
                     if(response.data.r == 'username_not_exist'){

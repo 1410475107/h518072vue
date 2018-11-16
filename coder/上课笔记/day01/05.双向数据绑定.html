@@ -10,10 +10,10 @@
 
 <body>
     <div id="app">
-        <form action="/login" method="post">
-            账号：<input type="text" name="username" v-model="formdata.username">
+        <form action="/login" method="post" name="myform"
+            账号：<input type="text" name="username" v-model="myform.username">
             <hr>
-            密码：<input type="password" name="passwd" value="" v-model="formdata.passwd">
+            密码：<input type="password" name="passwd" value="" v-model="myform.passwd">
             <hr>
             <button @click="Login" type="button">登录</button>
             <div :class="tc" v-show="tips">{{tips}}</div>
