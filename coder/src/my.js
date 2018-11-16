@@ -3,15 +3,16 @@ import Vue from 'vue';
 import Axios from 'axios';
 
 Vue.component('book-info', {
-    template:`      <div class="binfo">
-                    <img :src="bimg" alt="">
-                    <div>{{btitle}}</div>
-                    <div class="authors">{{authors}}</div>
-                    </div>`,
+    template:`  <div class="binfo">
+                    <img :src="binfo.bimg" alt="">
+                    <div>{{binfo.btitle}}</div>
+                    <div class="authors">{{binfo.authors}}</div>
+                </div>`,
     data:function(){
         return {imgsrc:'1'}
     },
-    props:['bimg', 'btitle', 'authors']
+    // props:['bimg', 'btitle', 'authors']
+    props:['binfo']
 });
 
 new Vue({
@@ -22,7 +23,7 @@ new Vue({
     methods:{
 
     },
-    mounted:function(){
+    beforeMount:function(){
         let _this = this;
         Axios.get('http://localhost:81/getbooks', {
             params: {

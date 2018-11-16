@@ -10,15 +10,7 @@
 
 <body>
     <div id="app">
-            <book-info 
-            v-for="book in booklist"
-            :key="book.bid"
-            :bimg="book.bimg" 
-            :btitle="book.btitle"
-            :authors="book.authors"
-            ></book-info>
-
-            
+            <book-info v-for="book in booklist" :key="book.bid" :binfo="book"></book-info>
     </div>
     
 </body>
