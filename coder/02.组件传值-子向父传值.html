@@ -10,15 +10,10 @@
 
 <body>
     <div id="app">
-       <my-div>
-           小明
-           <span slot="dabao">大宝</span>
-           <span slot="erbao">二宝</span>
-
-        </my-div>
-       <my-div>数据解耦股</my-div>
-       <my-div>JavaScript</my-div>
-       <div>我的盒子</div>
+        <search-form @myevent="getResult"></search-form>
+        <ol>
+            <li v-for="k in kwlists">{{k.kw}}</li>
+        </ol>
     </div>
 </body>
 </html>
