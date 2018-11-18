@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
+import MovieNews from '@/components/MovieNews'
 import MyAcom from '@/components/MyAcom'
 import MyBcom from '@/components/MyBcom'
 
@@ -22,6 +23,14 @@ export default new Router({
       path: '/b',
       name: 'MyBcom',
       component: MyBcom
+    },
+    {
+      path: '/news',
+      name: 'MovieNews',
+      component: MovieNews
     }
+
+
+    
   ]
 })

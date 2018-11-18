@@ -65,4 +65,56 @@ app.get('/getbooks', (req, res) => {
     });
 });
 
+app.get('/getmovie', (req, res) => {
+    //接收get过来的值
+    // let page = req.query.page;
+    // let sql = `SELECT * FROM book WHERE 1 LIMIT 50`;
+    // connection.query(sql, (err, results)=>{
+    //     res.json(results);
+    // });
+     res.json([
+        {
+          id: 1,
+          img:
+            "http://image11.m1905.cn/uploadfile/2018/1116/thumb_1_220_318_20181116094502849166.jpg",
+          mtitle: "茜茜公主（译制版）",
+          score: 9.0,
+          sum: "公主邂逅国王相恋"
+        },
+        {
+          id: 2,
+          img:
+            "http://image11.m1905.cn/uploadfile/2018/1116/thumb_1_220_318_20181116092518306841.jpg",
+          mtitle: "巴黎圣母院）",
+          score: 8.0,
+          sum: "巴黎圣母院"
+        },
+        {
+          id: 3,
+          img:
+            "http://image11.m1905.cn/uploadfile/2018/1116/thumb_1_220_318_20181116092518306841.jpg",
+          mtitle: "巴黎圣母院）",
+          score: 8.0,
+          sum: "巴黎圣母院"
+        },
+        {
+          id: 4,
+          img:
+            "http://image11.m1905.cn/uploadfile/2018/1116/thumb_1_220_318_20181116092518306841.jpg",
+          mtitle: "巴黎圣母院）",
+          score: 8.0,
+          sum: "巴黎圣母院"
+        },
+        {
+          id: 5,
+          img:
+            "http://image11.m1905.cn/uploadfile/2018/1116/thumb_1_220_318_20181116092518306841.jpg",
+          mtitle: "巴黎圣母院）",
+          score: 8.0,
+          sum: "巴黎圣母院"
+        }
+      ]);
+});
+
+
 app.listen(81);

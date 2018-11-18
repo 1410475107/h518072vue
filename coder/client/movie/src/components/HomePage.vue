@@ -20,8 +20,7 @@
 
 <script>
 // 子组件的使用
-import MyNav from './MyNav';
-import MyBottom from './MyBottom';
+
 export default {
   name: 'HomePage',
   data () {
@@ -29,8 +28,6 @@ export default {
     }
   },
   components:{
-      MyNav,
-      MyBottom
   }
 }
 </script>

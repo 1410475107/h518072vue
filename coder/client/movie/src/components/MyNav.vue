@@ -1,7 +1,7 @@
 <template>
     <ul class="nav">
-        <li><a href="###">首页</a></li>
-        <li><a href="###">新闻</a></li>
+        <li><router-link to="/">首页</router-link></li>
+        <li> <router-link to="/news">新闻</router-link></li>
         <li><a href="###">独家栏目</a></li>
     </ul>
 </template>

@@ -3,6 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Axios from 'axios';
+// 定义全局组件
+import MyNav from '@/components/MyNav';
+import MyBottom from '@/components/MyBottom';
+Vue.component('my-nav', MyNav);
+Vue.component('my-bottom', MyBottom);
+
+//注册全局的axios
+Vue.prototype.$http = Axios;
 
 Vue.config.productionTip = false
 
