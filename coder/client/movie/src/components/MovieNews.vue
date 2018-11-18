@@ -1,15 +1,19 @@
 <template>
-    <div class="index">
-        <my-nav></my-nav>
+  <div class="index">
+    <my-nav></my-nav>
 
-        <ul class="r">
-            <li> <img src="http://image14.m1905.cn/uploadfile/2018/1117/thumb_1_1380_460_20181117121251533836.jpg" alt=""> </li>
-        </ul>
+    <ul class="r">
+      <li> <img src="http://image14.m1905.cn/uploadfile/2018/1117/thumb_1_1380_460_20181117121251533836.jpg" alt=""> </li>
+    </ul>
 
-        <movie-info v-for="minfo in movieinfo" :key="minfo.id" :minfo="minfo"></movie-info>
+    <movie-info v-for="minfo in movieinfo" :key="minfo.id" :minfo="minfo"></movie-info>
+    <div style="clear:both;height:20px;"></div>
+    <hr>
+    <el-pagination background layout="prev, pager, next" :total="1000">
+    </el-pagination>
 
-        <my-bottom></my-bottom>
-    </div>
+    <my-bottom></my-bottom>
+  </div>
 </template>
 
 <script>
@@ -26,11 +30,11 @@ export default {
     MovieInfo
   },
   mounted() {
-      let _this = this;
-      _this.$http.get('/getmovie').then(function(response){
-          console.log(response.data);
-          _this.movieinfo = response.data;
-      });
+    let _this = this;
+    _this.$http.get("/getmovie").then(function(response) {
+      console.log(response.data);
+      _this.movieinfo = response.data;
+    });
   }
 };
 </script>
