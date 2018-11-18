@@ -4,6 +4,7 @@ import HomePage from '@/components/HomePage'
 import MovieNews from '@/components/MovieNews'
 import MyAcom from '@/components/MyAcom'
 import MyBcom from '@/components/MyBcom'
+import MyMovie from '@/components/MyMovie'
 
 Vue.use(Router)
 
@@ -28,8 +29,15 @@ export default new Router({
       path: '/news',
       name: 'MovieNews',
       component: MovieNews
+    },
+    {
+      path: '/movie/:id',
+      name: 'MyMovie',
+      component: MyMovie
     }
 
+
+    
 
     
   ]

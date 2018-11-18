@@ -5,6 +5,7 @@
         <ul class="r">
             <li> <img src="http://image14.m1905.cn/uploadfile/2018/1117/thumb_1_1380_460_20181117121251533836.jpg" alt=""> </li>
         </ul>
+
         <movie-info v-for="minfo in movieinfo" :key="minfo.id" :minfo="minfo"></movie-info>
 
         <my-bottom></my-bottom>
@@ -26,7 +27,7 @@ export default {
   },
   mounted() {
       let _this = this;
-      _this.$http.get('http://lulaoshi:81/getmovie').then(function(response){
+      _this.$http.get('/getmovie').then(function(response){
           console.log(response.data);
           _this.movieinfo = response.data;
       });

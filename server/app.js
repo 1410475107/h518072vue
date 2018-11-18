@@ -92,7 +92,7 @@ app.get('/getmovie', (req, res) => {
         {
           id: 3,
           img:
-            "http://image11.m1905.cn/uploadfile/2018/1116/thumb_1_220_318_20181116092518306841.jpg",
+            "http://image11.m1905.cn/uploadfile/2018/1117/thumb_1_150_226_20181117023311491330.jpg",
           mtitle: "巴黎圣母院）",
           score: 8.0,
           sum: "巴黎圣母院"

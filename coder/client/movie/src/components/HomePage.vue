@@ -6,7 +6,6 @@
             <li> <img src="http://image14.m1905.cn/uploadfile/2018/1117/thumb_1_1380_460_20181117121251533836.jpg" alt=""> </li>
         </ul>
 
-
         <ul class="ban2">
             <li>
                 <div>要闻</div> 
