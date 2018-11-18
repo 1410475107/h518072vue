@@ -18,4 +18,7 @@ export default {
 li{
   list-style: none;
 }
+body{
+  font-family:  Microsoft YaHei, SimSun, Arial;
+}
 </style>

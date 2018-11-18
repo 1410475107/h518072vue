@@ -1,12 +1,15 @@
 <template>
-    <div class="mymenu">
-        <ul>
-            <li>菜单1</li>
-            <li>菜单1</li>
-            <li>菜单1</li>
-            <li>菜单1</li>
-        </ul>
-    </div>
+	<div class="mymenu">
+		<ul>
+			<li>菜单1</li>
+			<li>菜单1</li>
+			<li>菜单1 </li>
+			<li>菜单1</li>
+		</ul>
+
+		<ul></ul>
+	</div>
+
 </template>
 
 <script>
